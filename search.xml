@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>如何显示图片</title>
+      <link href="/2023/02/01/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/"/>
+      <url>/2023/02/01/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/</url>
+      
+        <content type="html"><![CDATA[<p>选择要插入的本地图片（这个看不到 是因为路径问题）</p><p><img src="/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/VCG211381881418.webp"></p><p>可以看到上述图片的路径为<a href="%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/VCG211381881418.webp"></a></p><p>之后直接</p><pre class="line-numbers language-c" data-language="c"><code class="language-c">ctrl<span class="token operator">+</span>f    <span class="token comment">//搜索之后替换</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在全文搜索本文章的文章名+/ </p><p>在此示例</p><pre class="line-numbers language-c" data-language="c"><code class="language-c">为如何显示图片<span class="token operator">/</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>将本文所有的 替换为空格</p><p>之后保存 发布即可</p><p>修改路径图片显示成功</p><p><img src="/2023/02/01/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/VCG211381881418.webp"></p><p>这个是可以看到的图片</p><p><img src="/2023/02/01/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/ganyukeqing.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 图片显示方法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>文章发布流程</title>
+      <link href="/2023/01/31/hello-world/"/>
+      <url>/2023/01/31/hello-world/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 文章发布 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>代码高亮测试</title>
+      <link href="/2023/01/31/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%B5%8B%E8%AF%95/"/>
+      <url>/2023/01/31/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;stdio.h&gt;#include &lt;pthread.h&gt;#include &lt;windows.h&gt;#define N 100#define true 1#define producerNum  10#define consumerNum  5#define sleepTime 1000typedef int semaphore;typedef int item;item buffer[N] &#x3D; &#123;0&#125;;int in &#x3D; 0;int out &#x3D; 0;int proCount &#x3D; 0;semaphore mutex &#x3D; 1, empty &#x3D; N, full &#x3D; 0, proCmutex &#x3D; 1;void * producer(void * a)&#123;    while(true)&#123;        while(proCmutex &lt;&#x3D; 0);        proCmutex--;        proCount++;        printf(&quot;生产一个产品ID%d, 缓冲区位置为%d\n&quot;,proCount,in);        proCmutex++;        while(empty &lt;&#x3D; 0)&#123;            printf(&quot;缓冲区已满！\n&quot;);        &#125;        empty--;        while(mutex &lt;&#x3D; 0);        mutex--;        buffer[in] &#x3D; proCount;        in &#x3D; (in + 1) % N;        mutex++;        full++;        Sleep(sleepTime);    &#125;&#125;void * consumer(void *b)&#123;    while(true)&#123;        while(full &lt;&#x3D; 0)&#123;            printf(&quot;缓冲区为空！\n&quot;);        &#125;        full--;        while(mutex &lt;&#x3D; 0);        mutex--;        int nextc &#x3D; buffer[out];        buffer[out] &#x3D; 0;&#x2F;&#x2F;消费完将缓冲区设置为0        out &#x3D; (out + 1) % N;        mutex++;        empty++;        printf(&quot;\t\t\t\t消费一个产品ID%d,缓冲区位置为%d\n&quot;, nextc,out);        Sleep(sleepTime);    &#125;&#125;int main()&#123;    pthread_t threadPool[producerNum+consumerNum];    int i;    for(i &#x3D; 0; i &lt; producerNum; i++)&#123;        pthread_t temp;        if(pthread_create(&amp;temp, NULL, producer, NULL) &#x3D;&#x3D; -1)&#123;            printf(&quot;ERROR, fail to create producer%d\n&quot;, i);            exit(1);        &#125;        threadPool[i] &#x3D; temp;    &#125;&#x2F;&#x2F;创建生产者进程放入线程池    for(i &#x3D; 0; i &lt; consumerNum; i++)&#123;        pthread_t temp;        if(pthread_create(&amp;temp, NULL, consumer, NULL) &#x3D;&#x3D; -1)&#123;            printf(&quot;ERROR, fail to create consumer%d\n&quot;, i);            exit(1);        &#125;        threadPool[i+producerNum] &#x3D; temp;    &#125;&#x2F;&#x2F;创建消费者进程放入线程池    void * result;    for(i &#x3D; 0; i &lt; producerNum+consumerNum; i++)&#123;        if(pthread_join(threadPool[i], &amp;result) &#x3D;&#x3D; -1)&#123;            printf(&quot;fail to recollect\n&quot;);            exit(1);        &#125;    &#125;&#x2F;&#x2F;运行线程池    return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="/2023/01/31/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%B5%8B%E8%AF%95/ganyukeqing.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 网站部署测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网站部署</title>
+      <link href="/2023/01/31/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/"/>
+      <url>/2023/01/31/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2/</url>
+      
+        <content type="html"><![CDATA[<p>记录一下</p><h3 id="2023年1月31日12：17-网站部署成功"><a href="#2023年1月31日12：17-网站部署成功" class="headerlink" title="2023年1月31日12：17  网站部署成功"></a>2023年1月31日12：17  网站部署成功</h3>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 网站部署测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
