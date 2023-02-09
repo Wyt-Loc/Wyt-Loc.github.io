@@ -398,14 +398,14 @@ struct Structure_name // 结构体名称
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -590,6 +590,8 @@ struct Structure_name // 结构体名称
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>如上述代码，我们直接<code>sss</code>把传过去，显然是传值调用，但<code>sss</code>本身就占用了非常大的空间，然后又创建了一份一样大的形参临时拷贝，时间空间上浪费的问题非常严重。这样的话，很明显我们还是传址调用最好，无论<code>s</code>的占用有多大，我们只传了4个字节的地址。</p>
+<p>所以<strong>结构体传参通常使用传址调用</strong>。</p>
 <h5 id="学习结构体的整体代码"><a href="#学习结构体的整体代码" class="headerlink" title="学习结构体的整体代码"></a>学习结构体的整体代码</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
 
@@ -1086,7 +1088,7 @@ struct Structure_name // 结构体名称
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">3.6k</span>
+                        class="white-color">3.7k</span>
             
             
             
