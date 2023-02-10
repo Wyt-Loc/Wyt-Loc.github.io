@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FreeRTOS学习（1）---创建和删除任务, Wyt-Blog">
-    <meta name="description" content="FreeRTOS任务创建和删除API函数
-其中遇到的一个问题  开始配置的两个任务的优先级test1_task优先级为2，但是test2_task优先级为3，所以就造成每次执行任务都是test2_task先执行发现串口助手 在执行第5次te">
+    <meta name="keywords" content="FreeRTOS学习（2）-创建和删除任务-静态方法, Wyt-Blog">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>FreeRTOS学习（1）---创建和删除任务 | Wyt-Blog</title>
+    <title>FreeRTOS学习（2）-创建和删除任务-静态方法 | Wyt-Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -333,12 +332,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">FreeRTOS学习（1）---创建和删除任务</h1>
+                    <h1 class="description center-align post-title">FreeRTOS学习（2）-创建和删除任务-静态方法</h1>
                 </div>
             </div>
         </div>
@@ -378,7 +377,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-07
+                    2023-02-10
                 </div>
                 
 
@@ -392,14 +391,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    609
+                    0
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -417,88 +416,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="FreeRTOS任务创建和删除API函数"><a href="#FreeRTOS任务创建和删除API函数" class="headerlink" title="FreeRTOS任务创建和删除API函数"></a>FreeRTOS任务创建和删除API函数</h5><p><img src="/2023/02/07/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89-%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1/image-20230207154809873.png"></p>
-<p>其中遇到的一个问题  开始配置的两个任务的优先级<code>test1_task</code>优先级为2，但是<code>test2_task</code>优先级为3，所以就造成每次执行任务都是<code>test2_task</code>先执行发现串口助手 在执行第5次<code>test1_task</code>是<code>test2_task</code>多执行一次。</p>
-<p>最终发现是两个任务的优先级导致的。</p>
-<p>优先级越大，优先程度越高。</p>
-<h5 id="任务创建–不可少的就是开始任务"><a href="#任务创建–不可少的就是开始任务" class="headerlink" title="任务创建–不可少的就是开始任务"></a>任务创建–不可少的就是开始任务</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//创建开始任务</span>
-   <span class="token function">xTaskCreate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>TaskFunction_t <span class="token punctuation">)</span> start_task<span class="token punctuation">,</span>            <span class="token comment">//任务函数</span>
-               <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>    <span class="token punctuation">)</span> <span class="token string">"start_task"</span><span class="token punctuation">,</span>          <span class="token comment">//任务名称</span>
-               <span class="token punctuation">(</span><span class="token class-name">uint16_t</span>       <span class="token punctuation">)</span> START_STK_SIZE<span class="token punctuation">,</span>        <span class="token comment">//任务堆栈大小</span>
-               <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span>          <span class="token punctuation">)</span> <span class="token constant">NULL</span><span class="token punctuation">,</span>                  <span class="token comment">//传递给任务函数的参数</span>
-               <span class="token punctuation">(</span>UBaseType_t    <span class="token punctuation">)</span> START_TASK_PRIO<span class="token punctuation">,</span>       <span class="token comment">//任务优先级</span>
-               <span class="token punctuation">(</span>TaskHandle_t<span class="token operator">*</span>  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>StartTask_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//任务句柄    </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="每个任务都要有的相关配置–这是开始任务的配置"><a href="#每个任务都要有的相关配置–这是开始任务的配置" class="headerlink" title="每个任务都要有的相关配置–这是开始任务的配置"></a>每个任务都要有的相关配置–这是开始任务的配置</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//开始任务配置</span>
-<span class="token keyword">void</span> <span class="token function">start_task</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>pvParameters<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//任务函数</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">START_TASK_PRIO</span>  <span class="token expression"><span class="token number">1</span>  </span><span class="token comment">//任务优先级   //优先级为 0 是 开启任务调度使用 优先级31也是系统所用 所以此处不能使用优先级0和31</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">START_STK_SIZE</span> <span class="token expression"><span class="token number">120</span> </span><span class="token comment">//任务堆栈大小</span></span>
-TaskHandle_t StartTask_Handler<span class="token punctuation">;</span> <span class="token comment">//任务句柄</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="在开始任务中创建任务函数"><a href="#在开始任务中创建任务函数" class="headerlink" title="在开始任务中创建任务函数"></a>在开始任务中创建任务函数</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">start_task</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>pvParameters<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token comment">//任务1</span>
-    <span class="token function">xTaskCreate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>TaskFunction_t <span class="token punctuation">)</span> test1_task<span class="token punctuation">,</span>            <span class="token comment">//任务函数</span>
-                <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>    <span class="token punctuation">)</span> <span class="token string">"test1_task"</span><span class="token punctuation">,</span>          <span class="token comment">//任务名称</span>
-                <span class="token punctuation">(</span><span class="token class-name">uint16_t</span>       <span class="token punctuation">)</span> TEST1_STK_SIZE<span class="token punctuation">,</span>        <span class="token comment">//任务堆栈大小</span>
-                <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span>          <span class="token punctuation">)</span> <span class="token constant">NULL</span><span class="token punctuation">,</span>                  <span class="token comment">//传递给任务函数的参数</span>
-                <span class="token punctuation">(</span>UBaseType_t    <span class="token punctuation">)</span> TEST1_TASK_PRIO<span class="token punctuation">,</span>       <span class="token comment">//任务优先级</span>
-                <span class="token punctuation">(</span>TaskHandle_t<span class="token operator">*</span>  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>Test1Task_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//任务句柄         	</span>
-		<span class="token comment">//任务2</span>
-    <span class="token function">xTaskCreate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>TaskFunction_t <span class="token punctuation">)</span> test2_task<span class="token punctuation">,</span>            <span class="token comment">//任务函数</span>
-                <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span>    <span class="token punctuation">)</span> <span class="token string">"test2_task"</span><span class="token punctuation">,</span>          <span class="token comment">//任务名称</span>
-                <span class="token punctuation">(</span><span class="token class-name">uint16_t</span>       <span class="token punctuation">)</span> TEST2_STK_SIZE<span class="token punctuation">,</span>        <span class="token comment">//任务堆栈大小</span>
-                <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span>          <span class="token punctuation">)</span> <span class="token constant">NULL</span><span class="token punctuation">,</span>                  <span class="token comment">//传递给任务函数的参数</span>
-                <span class="token punctuation">(</span>UBaseType_t    <span class="token punctuation">)</span> TEST2_TASK_PRIO<span class="token punctuation">,</span>       <span class="token comment">//任务优先级</span>
-                <span class="token punctuation">(</span>TaskHandle_t<span class="token operator">*</span>  <span class="token punctuation">)</span> <span class="token operator">&amp;</span>Test2Task_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//任务句柄    </span>
-			<span class="token function">vTaskDelete</span><span class="token punctuation">(</span>StartTask_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//传入要删除函数的句柄   如果要删除开始任务本身 则传入NULL</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="当然任务函数也是要有配置"><a href="#当然任务函数也是要有配置" class="headerlink" title="当然任务函数也是要有配置"></a>当然任务函数也是要有配置</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//任务函数1配置</span>
-<span class="token keyword">void</span> <span class="token function">test1_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TEST1_TASK_PRIO</span> <span class="token expression"><span class="token number">3</span>  </span><span class="token comment">//数越大 越优先  越大越快</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TEST1_STK_SIZE</span> <span class="token expression"><span class="token number">120</span></span></span>
-TaskHandle_t Test1Task_Handler<span class="token punctuation">;</span>
-
-<span class="token comment">//任务函数2配置</span>
-<span class="token keyword">void</span> <span class="token function">test2_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TEST2_TASK_PRIO</span> <span class="token expression"><span class="token number">2</span></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TEST2_STK_SIZE</span> <span class="token expression"><span class="token number">120</span></span></span>
-TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="任务函数"><a href="#任务函数" class="headerlink" title="任务函数"></a>任务函数</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//测试函数1</span>
-<span class="token keyword">void</span> <span class="token function">test1_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">char</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		i<span class="token operator">++</span><span class="token punctuation">;</span>
-		LED0 <span class="token operator">=</span> <span class="token operator">~</span>LED0<span class="token punctuation">;</span>
-		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"TASK1..... %d\r\n"</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token function">vTaskDelay</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			<span class="token function">vTaskDelete</span><span class="token punctuation">(</span>Test2Task_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//传入要删除函数的句柄</span>
-			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"TASK2 shanchu\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-
-<span class="token comment">//测试函数2</span>
-<span class="token keyword">void</span> <span class="token function">test2_task</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">char</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		num<span class="token operator">++</span><span class="token punctuation">;</span>
-		LED1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-		<span class="token function">vTaskDelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		LED1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-		<span class="token function">vTaskDelay</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"TASK2.....%d\r\n"</span><span class="token punctuation">,</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="必须要有的一定要开启任务调度器"><a href="#必须要有的一定要开启任务调度器" class="headerlink" title="必须要有的一定要开启任务调度器"></a>必须要有的一定要开启任务调度器</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">vTaskStartScheduler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">//开启任务调度	</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h5 id="任务删除"><a href="#任务删除" class="headerlink" title="任务删除"></a>任务删除</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">vTaskDelete</span><span class="token punctuation">(</span>StartTask_Handler<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//传入要删除函数的句柄   如果要删除开始任务本身 则传入NULL</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
+                
                 
             </div>
             <hr/>
@@ -524,7 +442,7 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wyt-loc.github.io/2023/02/07/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89-%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1/">https://wyt-loc.github.io/2023/02/07/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89-%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1/</a>
+                    <a href="https://wyt-loc.github.io/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">https://wyt-loc.github.io/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -606,17 +524,18 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/02/07/%E5%A0%86%E5%86%85%E5%AD%98%E5%92%8C%E6%A0%88%E5%86%85%E5%AD%98%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                <a href="/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="堆内存和栈内存的区别">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="FreeRTOS学习（2）-创建和删除任务-静态方法">
                         
-                        <span class="card-title">堆内存和栈内存的区别</span>
+                        <span class="card-title">FreeRTOS学习（2）-创建和删除任务-静态方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -626,9 +545,9 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -637,11 +556,12 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A0%86%E5%86%85%E5%AD%98%E5%92%8C%E6%A0%88%E5%86%85%E5%AD%98/">
-                        <span class="chip bg-color">堆内存和栈内存</span>
+                    <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">FreeRTOS学习</span>
                     </a>
                     
                 </div>
@@ -655,13 +575,13 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/01/%E5%A6%82%E4%BD%95%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87/">
+                <a href="/2023/02/09/STM32F1-SPI%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="如何显示图片">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="STM32F1_SPI使用">
                         
-                        <span class="card-title">如何显示图片</span>
+                        <span class="card-title">STM32F1_SPI使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -672,7 +592,7 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
                             </span>
                         <span class="publish-author">
                             
@@ -685,8 +605,8 @@ TaskHandle_t Test2Task_Handler<span class="token punctuation">;</span><span aria
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95/">
-                        <span class="chip bg-color">图片显示方法</span>
+                    <a href="/tags/SPI%E4%BD%BF%E7%94%A8/">
+                        <span class="chip bg-color">SPI使用</span>
                     </a>
                     
                 </div>
