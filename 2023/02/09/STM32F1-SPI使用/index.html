@@ -5,12 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="STM32F1_SPI使用, Wyt-Blog">
-    <meta name="description" content="在做小车过程中，遇到了一个stm32精英版单片机资源不够的情况，所以外加了两个stm32c8t6单片机来完成，而它们之间的通信选择使用主从spi通信的方式来完成。
-他们之间的配置简单做个记录
-
-
-主机控制 SPI_1
-void SPI1_I">
+    <meta name="description" content="在做小车过程中，由于需要控制4个步进电机，4个直流电机，步进电机采用主从定时器的方式（比较精确）控制，那么一个步进电机则需要2个定时器资源，但是一个stm32精英版单片机也就8个定时器，不可能全都用来控制步进电机，所以外加了两个stm32c">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -389,14 +384,14 @@ void SPI1_I">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-09
+                    2023-02-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2k
                 </div>
                 
 
@@ -421,7 +416,7 @@ void SPI1_I">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在做小车过程中，遇到了一个<code>stm32精英版</code>单片机资源不够的情况，所以外加了两个<code>stm32c8t6</code>单片机来完成，而它们之间的通信选择使用<code>主从spi通信</code>的方式来完成。</p>
+                <p>在做小车过程中，由于需要控制4个步进电机，4个直流电机，步进电机采用主从定时器的方式（比较精确）控制，那么一个步进电机则需要2个定时器资源，但是一个<code>stm32精英版</code>单片机也就8个定时器，不可能全都用来控制步进电机，所以外加了两个<code>stm32c8t6</code>单片机来完成对步进电机的控制，而直流电机则采用高级定时器的<code>pwm</code>功能，很简单的完成对直流电机的控制。而它们之间的通信选择使用<code>主从spi通信</code>的方式来完成。<code>精英版</code>作为<code>spi</code>主机来控制两个<code>c8t6从机</code>完成整套系统的驱动控制。大概思路就是这样。</p>
 <p>他们之间的配置简单做个记录</p>
 <p><img src="/2023/02/09/STM32F1-SPI%E4%BD%BF%E7%94%A8/image-20230209220615241.png" alt="image-20230209220615241"></p>
 <p><img src="/2023/02/09/STM32F1-SPI%E4%BD%BF%E7%94%A8/image-20230209220627759.png" alt="image-20230209220627759"></p>
@@ -653,9 +648,7 @@ u8 <span class="token function">SPI2_ReadWriteByte</span><span class="token punc
 	
   <span class="token function">GPIO_ResetBits</span><span class="token punctuation">(</span>GPIOB<span class="token punctuation">,</span>GPIO_Pin_12<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-
 <span class="token comment">/*这里没有SPI1_SetSpeed函数哦！*/</span>
-
 
 u8 <span class="token function">SPI2_ReadWriteByte</span><span class="token punctuation">(</span>u8 TxData<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
@@ -663,7 +656,7 @@ u8 <span class="token function">SPI2_ReadWriteByte</span><span class="token punc
 	<span class="token function">SPI_I2S_SendData</span><span class="token punctuation">(</span>SPI2<span class="token punctuation">,</span> TxData<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//通过外设SPIx发送一个byte  数据</span>
   <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">SPI_I2S_GetFlagStatus</span><span class="token punctuation">(</span>SPI2<span class="token punctuation">,</span> SPI_I2S_FLAG_RXNE<span class="token punctuation">)</span> <span class="token operator">==</span> RESET<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">//等待接收完一个byte  </span>
 	<span class="token keyword">return</span> <span class="token function">SPI_I2S_ReceiveData</span><span class="token punctuation">(</span>SPI2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//返回通过SPIx最近接收的数据	</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -1051,7 +1044,7 @@ u8 <span class="token function">SPI2_ReadWriteByte</span><span class="token punc
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">5.9k</span>
+                        class="white-color">7k</span>
             
             
             

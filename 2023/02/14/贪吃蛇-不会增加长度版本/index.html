@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FreeRTOS学习（2）-创建和删除任务-静态方法, Wyt-Blog">
-    <meta name="description" content="">
+    <meta name="keywords" content="贪吃蛇--不会增加长度版本, Wyt-Blog">
+    <meta name="description" content="突发奇想 ，想做一个游戏。
+#include &amp;lt;cstdio&amp;gt;
+#include &amp;lt;cstdlib&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;windows.h&amp;gt;
+#inc">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>FreeRTOS学习（2）-创建和删除任务-静态方法 | Wyt-Blog</title>
+    <title>贪吃蛇--不会增加长度版本 | Wyt-Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +337,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">FreeRTOS学习（2）-创建和删除任务-静态方法</h1>
+                    <h1 class="description center-align post-title">贪吃蛇--不会增加长度版本</h1>
                 </div>
             </div>
         </div>
@@ -361,8 +366,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">FreeRTOS学习</span>
+                            <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E4%B8%AA%E4%BA%BA%E7%88%B1%E5%A5%BD/">
+                                <span class="chip bg-color">游戏开发--个人爱好</span>
                             </a>
                         
                     </div>
@@ -377,28 +382,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-02-10
+                    2023-02-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-10
+                    2023-02-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -416,7 +421,228 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>突发奇想 ，想做一个游戏。</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+#include &lt;windows.h&gt;
+#include &lt;conio.h&gt;
+#include &lt;ctime&gt;
+
+using namespace std;
+#define width  160
+#define height  40
+
+void GameStart()&#123;
+    system(&quot;mode con cols&#x3D;180 lines&#x3D;50&quot;); &#x2F;&#x2F;设置窗口命令
+&#125;
+
+void Welcome()&#123;
+    printf(&quot;\n\n\n\n\n\t\t\t\t\t\t&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n&quot;);
+    printf(&quot;\t\t\t\t\t\t&#x3D;&#x3D;      欢迎来到Wyt贪吃蛇       &#x3D;&#x3D;\n&quot;);
+    printf(&quot;\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;\n&quot;);
+    &#x2F;&#x2F;暂停
+    system(&quot;pause&quot;);
+    &#x2F;&#x2F;清屏
+    system(&quot;cls&quot;);
+&#125;
+
+&#x2F;&#x2F;&#x2F;
+&#x2F;&#x2F;&#x2F; \param x  x坐标
+&#x2F;&#x2F;&#x2F; \param y  y坐标
+&#x2F;&#x2F;设置光标位置
+void gotoxy(int x, int y)&#123;
+
+    COORD pos &#x3D; &#123;static_cast&lt;SHORT&gt;(x),static_cast&lt;SHORT&gt;(y)&#125;;
+    HANDLE hOut &#x3D; GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hOut,pos);
+&#125;
+
+&#x2F;&#x2F;创建地图
+void Create_Map()&#123;
+
+    for(int i &#x3D; 2; i &lt;&#x3D; width; i +&#x3D; 2)&#123;
+        gotoxy(i, 3);
+        printf(&quot;■&quot;);
+        gotoxy(i,height);
+        printf(&quot;■&quot;);
+    &#125;
+
+    for(int j&#x3D;3; j &lt; height; j++)&#123;
+        gotoxy(2, j);
+        printf(&quot;■&quot;);
+        gotoxy(width, j);
+        printf(&quot;■&quot;);
+    &#125;
+
+&#125;
+
+&#x2F;&#x2F;设置蛇身子 使用链表实现
+typedef struct SNAKE
+&#123;
+    int x;
+    int y;
+    struct SNAKE *next;
+&#125;Snake;
+
+&#x2F;&#x2F;初始化蛇
+Snake *g_head &#x3D; nullptr;
+
+void InitSnake()&#123;
+    Snake *temp &#x3D;  (Snake*)malloc(sizeof(Snake)); &#x2F;&#x2F;定义蛇初始位置 最左边的点
+
+        temp-&gt;x &#x3D; 20;
+        temp-&gt;y &#x3D; 15;
+        temp-&gt;next &#x3D; nullptr;
+
+    g_head &#x3D; temp;  &#x2F;&#x2F;将蛇尾巴赋值给g_head
+
+    for(int i &#x3D; 1; i &lt;&#x3D; 3; i++)&#123;
+        Snake  *p &#x3D; (Snake*)malloc(sizeof(Snake));
+        p-&gt;x &#x3D; 20 + 2 * i;
+        p-&gt;y &#x3D; 15;
+        p-&gt;next &#x3D; nullptr;
+        temp-&gt;next &#x3D; p; &#x2F;&#x2F;将指针向右传
+        temp &#x3D; p; &#x2F;&#x2F;
+    &#125;
+
+    &#x2F;&#x2F;输出显示
+    temp &#x3D; g_head;
+    while(temp !&#x3D; nullptr)&#123;
+        gotoxy(temp-&gt;x,temp-&gt;y);
+        printf(&quot;■&quot;);
+        temp &#x3D; temp-&gt;next;
+    &#125;
+&#125;
+
+void MoveSnake(int dir)&#123;
+        &#x2F;&#x2F;得到蛇的链表
+        Snake *p &#x3D; g_head;
+
+        &#x2F;&#x2F;得到蛇头  链表尾
+        while (p-&gt;next !&#x3D; nullptr &amp;&amp; p !&#x3D; nullptr) &#123;
+            p &#x3D; p-&gt;next;
+        &#125;
+
+        &#x2F;&#x2F;添加一个新蛇头
+        Snake *temp &#x3D;(Snake*)malloc(sizeof(Snake));
+        temp-&gt;x &#x3D; p-&gt;x;
+        temp-&gt;y &#x3D; p-&gt;y - 1;
+        temp-&gt;next &#x3D; nullptr;
+
+        if(dir &#x3D;&#x3D; 72)&#123;
+            temp-&gt;x &#x3D; p-&gt;x;
+            temp-&gt;y &#x3D; p-&gt;y - 1;
+        &#125;
+        else if(dir &#x3D;&#x3D; 80)&#123;
+            temp-&gt;x &#x3D; p-&gt;x;
+            temp-&gt;y &#x3D; p-&gt;y + 1;
+        &#125;
+        else if(dir &#x3D;&#x3D; 75)&#123;
+            temp-&gt;x &#x3D; p-&gt;x - 2;
+            temp-&gt;y &#x3D; p-&gt;y;
+        &#125;
+        else if(dir &#x3D;&#x3D; 77)&#123;
+            temp-&gt;x &#x3D; p-&gt;x + 2;
+            temp-&gt;y &#x3D; p-&gt;y;
+        &#125;
+        p-&gt;next &#x3D; temp;
+
+
+        gotoxy(temp-&gt;x, temp-&gt;y);
+        printf(&quot;■&quot;);
+        gotoxy(g_head-&gt;x, g_head-&gt;y);
+        printf(&quot;  &quot;);
+
+        &#x2F;&#x2F;释放蛇尾
+        temp &#x3D; g_head-&gt;next;
+        delete g_head;
+        g_head &#x3D; temp;
+&#125;
+
+
+int foodx,foody;
+int food_flag &#x3D; 0;
+void sjcsswhs()             &#x2F;&#x2F;随机产生一个食物
+&#123;
+    srand(time(NULL));
+
+    foodx &#x3D; rand() % (width - 4) + 2;       &#x2F;&#x2F;使用宏运算随机数最大值需要加括号
+
+    while (foodx % 2)                       &#x2F;&#x2F;如果食物的x坐标不是偶数，再获取一个x坐标
+    &#123;
+        foodx &#x3D; rand() % (width - 4) + 2;   &#x2F;&#x2F;宽度
+    &#125;
+
+    foody &#x3D; rand() % (height - 7) + 3;      &#x2F;&#x2F;高度
+
+    gotoxy(foodx, foody);
+    printf(&quot;★&quot;);
+    food_flag &#x3D; 1;
+&#125;
+
+&#x2F;&#x2F;运行游戏 蛇动起来
+void RunGame()&#123;
+    char ch &#x3D; 0;
+    int dir1 &#x3D; 0;
+    while(1)&#123;
+        &#x2F;&#x2F;判断是否有输出
+        if(_kbhit())&#123;
+            &#x2F;&#x2F;得到输入
+            ch &#x3D; getch();
+           switch(ch)&#123;
+               &#x2F;&#x2F;控制方向
+               case 72:
+                    dir1 &#x3D; 72;
+                   break; &#x2F;&#x2F;上
+               case 75:
+                   dir1 &#x3D; 75;
+                   break; &#x2F;&#x2F;左
+               case 77:
+                   dir1 &#x3D; 77;
+                   break; &#x2F;&#x2F;右
+               case 80:
+                   dir1 &#x3D; 80;
+                   break; &#x2F;&#x2F;下
+           &#125;
+        &#125;
+        if(food_flag &#x3D;&#x3D; 0) &#123;
+            sjcsswhs();
+        &#125;
+        else&#123;
+            Snake *p &#x3D; g_head;
+            &#x2F;&#x2F;得到蛇头  链表尾
+            while (p-&gt;next !&#x3D; nullptr &amp;&amp; p !&#x3D; nullptr) &#123;
+                p &#x3D; p-&gt;next;
+                if(p-&gt;x &#x3D;&#x3D; foodx &amp;&amp; p-&gt;y &#x3D;&#x3D; foody)&#123;
+                    food_flag &#x3D; 0;
+                &#125;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;移动蛇
+        MoveSnake(dir1);
+        Sleep(300);
+    &#125;
+&#125;
+
+
+
+
+int main()
+&#123;
+    GameStart(); &#x2F;&#x2F;游戏开始
+    Welcome(); &#x2F;&#x2F;欢迎界面
+    Create_Map();
+    InitSnake();
+    RunGame();
+    getchar();
+    getchar();
+    return 1;
+&#125;
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
                 
             </div>
             <hr/>
@@ -442,7 +668,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wyt-loc.github.io/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">https://wyt-loc.github.io/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/</a>
+                    <a href="https://wyt-loc.github.io/2023/02/14/%E8%B4%AA%E5%90%83%E8%9B%87-%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E9%95%BF%E5%BA%A6%E7%89%88%E6%9C%AC/">https://wyt-loc.github.io/2023/02/14/%E8%B4%AA%E5%90%83%E8%9B%87-%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E9%95%BF%E5%BA%A6%E7%89%88%E6%9C%AC/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -480,8 +706,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">FreeRTOS学习</span>
+                                <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E4%B8%AA%E4%BA%BA%E7%88%B1%E5%A5%BD/">
+                                    <span class="chip bg-color">游戏开发--个人爱好</span>
                                 </a>
                             
                         </div>
@@ -524,9 +750,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/02/14/%E8%B4%AA%E5%90%83%E8%9B%87-%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E9%95%BF%E5%BA%A6%E7%89%88%E6%9C%AC/">
                     <div class="card-image">
@@ -544,9 +771,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -555,6 +782,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -573,13 +801,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/09/STM32F1-SPI%E4%BD%BF%E7%94%A8/">
+                <a href="/2023/02/10/FreeRTOS%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E4%BB%BB%E5%8A%A1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="STM32F1_SPI使用">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="FreeRTOS学习（2）-创建和删除任务-静态方法">
                         
-                        <span class="card-title">STM32F1_SPI使用</span>
+                        <span class="card-title">FreeRTOS学习（2）-创建和删除任务-静态方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -590,7 +818,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-10
                             </span>
                         <span class="publish-author">
                             
@@ -603,8 +831,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SPI%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">SPI使用</span>
+                    <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">FreeRTOS学习</span>
                     </a>
                     
                 </div>
