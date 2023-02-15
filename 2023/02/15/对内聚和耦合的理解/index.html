@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Wyt-Blog">
-    <meta name="description" content="本博客建立是出于个人爱好，记录日常学习所用">
+    <meta name="keywords" content="对内聚和耦合的理解, Wyt-Blog">
+    <meta name="description" content="什么是模块？模块就是从逻辑上将系统分解为更细微的部分， 分而治之， 复杂问题拆解为若干简单问题， 逐个解决。
+耦合主要描述模块之间的关系， 内聚主要描述模块内部。 模块的粒度可大可小， 可以是函数， 类， 功能块等等
+耦合？模块之间存在依赖">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Wyt-Blog</title>
+    <title>对内聚和耦合的理解 | Wyt-Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +334,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">对内聚和耦合的理解</h1>
                 </div>
             </div>
         </div>
@@ -359,9 +361,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                                <span class="chip bg-color">软件工程知识点</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -373,28 +379,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-31
+                    2023-02-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-09
+                    2023-02-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    350
+                    566
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -412,80 +418,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <html>
-<body>
-<pre>
-<h1>�Vision Build Log</h1>
-<h2>Tool Versions:</h2>
-IDE-Version: ��Vision V5.25.3.0
-Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: �� ��̩, 123, LIC=47GU5-G2MF7-306NC-7214A-XMR39-7I9G4
- 
-Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.36.0.0
-Toolchain Path:  F:\MDK\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 7 (build 960)
-Assembler:       Armasm.exe V5.06 update 7 (build 960)
-Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
-Library Manager: ArmAr.exe V5.06 update 7 (build 960)
-Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
-CPU DLL:         SARMCM3.DLL V5.36.0.0
-Dialog DLL:      DARMSTM.DLL V1.68.0.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
-Dialog DLL:      TARMSTM.DLL V1.66.0.0
- 
-<h2>Project:</h2>
-C:\Users\dell\Desktop\Motor_slave_1\USER\PWM.uvprojx
-Project File Date:  01/04/2023
-
-<h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'F:\MDK\ARM\ARMCC\Bin'
-Rebuild target 'PWM'
-compiling led.c...
-compiling stm32f10x_it.c...
-compiling key.c...
-compiling main.c...
-..\HARDWARE\SPI\spi.h(14): warning:  #47-D: incompatible redefinition of macro "EN1"  (declared at line 16 of "..\HARDWARE\MOTOR\Motor.h")
-  #define EN1 	PBout(0) = 1
-main.c: 1 warning, 0 errors
-compiling Motor.c...
-compiling timer.c...
-compiling system_stm32f10x.c...
-assembling startup_stm32f10x_hd.s...
-compiling delay.c...
-compiling PID.c...
-compiling spi.c...
-compiling usart.c...
-compiling core_cm3.c...
-compiling sys.c...
-compiling misc.c...
-compiling stm32f10x_gpio.c...
-compiling stm32f10x_rcc.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_usart.c...
-compiling stm32f10x_tim.c...
-compiling stm32f10x_spi.c...
-linking...
-Program Size: Code=11488 RO-data=336 RW-data=56 ZI-data=1856  
-FromELF: creating hex file...
-"..\OBJ\PWM.axf" - 0 Error(s), 1 Warning(s).
-
-<h2>Software Packages used:</h2>
-
-Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.3.0.pack
-                Keil.STM32F1xx_DFP.2.3.0
-                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
-
-<h2>Collection of Component include folders:</h2>
-  .\RTE\_PWM
-  F:\MDK\packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
-
-<h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
-</pre>
-</body>
-</html>
+                <h2 id="什么是模块？"><a href="#什么是模块？" class="headerlink" title="什么是模块？"></a>什么是模块？</h2><p>模块就是从逻辑上将系统分解为更细微的部分， 分而治之， 复杂问题拆解为若干简单问题， 逐个解决。</p>
+<p>耦合主要描述模块之间的关系， 内聚主要描述模块内部。 模块的粒度可大可小， 可以是函数， 类， 功能块等等</p>
+<h2 id="耦合？"><a href="#耦合？" class="headerlink" title="耦合？"></a>耦合？</h2><p>模块之间存在依赖， 导致改动可能会互相影响， 关系越紧密， 耦合越强， 模块独立性越差。</p>
+<p>比如模块A直接操作了模块B中数据， 则视为强耦合， 若A只是通过数据与模块B交互， 则视为弱耦合。</p>
+<p>独立的模块便于扩展， 维护， 写单元测试， 如果模块之间重重依赖， 会极大降低开发效率。</p>
+<p><img src="/2023/02/15/%E5%AF%B9%E5%86%85%E8%81%9A%E5%92%8C%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3/oe54ueazta.gif" alt="img"></p>
+<h2 id="内聚？"><a href="#内聚？" class="headerlink" title="内聚？"></a>内聚？</h2><p>模块内部的元素， 关联性越强， 则内聚越高， 模块单一性更强。 一个模块应当尽可能独立完成某个功能，</p>
+<p>如果有各种场景需要被引入到当前模块， 代码质量将变得非常脆弱， 这种情况建议拆分为多个模块。</p>
+<p>低内聚的模块代码， 不管是维护， 扩展还是重构都相当麻烦， 难以下手。</p>
+<p><img src="/2023/02/15/%E5%AF%B9%E5%86%85%E8%81%9A%E5%92%8C%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3/j6lrii18j0.gif" alt="img"></p>
+<h2 id="接口设计原则"><a href="#接口设计原则" class="headerlink" title="接口设计原则"></a>接口设计原则</h2><p>好的接口应当满足设计模式六大原则， 很多设计模式， 框架都是基于高内聚低耦合这个出发点的。</p>
+<ul>
+<li>单一职责原则：一个类只负责一个功能领域中的相应职责。</li>
+<li>开闭原则：一个软件实体应当对扩展开放，对修改关闭。</li>
+<li>里氏代换原则：所有引用基类（父类）的地方必须能透明地使用其子类的对象。</li>
+<li>依赖倒转原则：抽象不应该依赖于细节， 细节应当依赖于抽象。 换言之， 要针对接口编程， 而不是针对实现编程。</li>
+<li>接口隔离原则：使用多个专门的接口， 而不使用单一的总接口， 即客户端不应该依赖那些它不需要的接口。</li>
+<li>迪米特法则： 一个软件实体应当尽可能少地与其他实体发生相互作用， 例如外观模式， 对外暴露统一接口。</li>
+</ul>
 
                 
             </div>
@@ -512,7 +463,7 @@ Build Time Elapsed:  00:00:03
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://wyt-loc.github.io/File/%E5%B0%8F%E9%A1%B9%E7%9B%AE/Motor_slave_1/OBJ/PWM.build_log.html">https://wyt-loc.github.io/File/%E5%B0%8F%E9%A1%B9%E7%9B%AE/Motor_slave_1/OBJ/PWM.build_log.html</a>
+                    <a href="https://wyt-loc.github.io/2023/02/15/%E5%AF%B9%E5%86%85%E8%81%9A%E5%92%8C%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3/">https://wyt-loc.github.io/2023/02/15/%E5%AF%B9%E5%86%85%E8%81%9A%E5%92%8C%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,7 +500,11 @@ Build Time Elapsed:  00:00:03
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                                    <span class="chip bg-color">软件工程知识点</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -595,13 +550,13 @@ Build Time Elapsed:  00:00:03
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/File/%E5%B0%8F%E9%A1%B9%E7%9B%AE/Motor_slave_1/OBJ/PWM.build_log.html">
+                <a href="/2023/02/15/%E5%AF%B9%E5%86%85%E8%81%9A%E5%92%8C%E8%80%A6%E5%90%88%E7%9A%84%E7%90%86%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="对内聚和耦合的理解">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">对内聚和耦合的理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -612,7 +567,7 @@ Build Time Elapsed:  00:00:03
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-15
                             </span>
                         <span class="publish-author">
                             
@@ -624,22 +579,30 @@ Build Time Elapsed:  00:00:03
                 </div>
 
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                        <span class="chip bg-color">软件工程知识点</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/File/%E5%B0%8F%E9%A1%B9%E7%9B%AE/Motor_slave_1/OBJ/PWM.build_log.html">
+                <a href="/2023/02/15/%E8%B4%AA%E5%90%83%E8%9B%87%E7%BB%88%E7%89%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="贪吃蛇终版">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">贪吃蛇终版</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -650,7 +613,7 @@ Build Time Elapsed:  00:00:03
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-15
                             </span>
                         <span class="publish-author">
                             
@@ -660,7 +623,14 @@ Build Time Elapsed:  00:00:03
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E4%B8%9A%E4%BD%99/">
+                        <span class="chip bg-color">游戏开发--业余</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
