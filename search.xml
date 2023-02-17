@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>耗时三天画完第一块板子</title>
+      <link href="/2023/02/17/%E8%80%97%E6%97%B6%E4%B8%89%E5%A4%A9%E7%94%BB%E5%AE%8C%E7%AC%AC%E4%B8%80%E5%9D%97%E6%9D%BF%E5%AD%90/"/>
+      <url>/2023/02/17/%E8%80%97%E6%97%B6%E4%B8%89%E5%A4%A9%E7%94%BB%E5%AE%8C%E7%AC%AC%E4%B8%80%E5%9D%97%E6%9D%BF%E5%AD%90/</url>
+      
+        <content type="html"><![CDATA[<p>耗时三天终于在2月17日，快吃晚饭之前画完了第一块PCB板，0报错。</p><p>接下来就是接着补充自己电路知识，为无人机做准备，打算借助实验室的<code>UWB定位</code>模块来实现高级点的无人机飞控，暂时有这个想法。</p><p>应该不简单，电路板的话，自己设计应该是够呛了，PCB现在还是太垃圾了，模仿着画一个还得3天。</p><p>无人机项目实现的功能，起码的滞空，前进后退左转右转，但是这个太普通了，加上现有的<code>UWB定位</code>实现位置的可控。</p><p>追求去实现在PC上 实时显示无人机目前的状态 高度 速度  机翼的转速，再加上一些模块类似 摄像头 或者是直接在下边下挂一个机械臂。</p><p> 像这种无人机外卖。 当然如果顺利在加上 无人机编队飞行那就更好了。先想想吧。。。。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PCB </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>画PCB遇到的问题解决方法</title>
       <link href="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
       <url>/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
       
-        <content type="html"><![CDATA[<p>b</p><h3 id="布线快捷键"><a href="#布线快捷键" class="headerlink" title="布线快捷键"></a>布线快捷键</h3><p><strong>ctrl+w</strong></p><h3 id="PCB如何旋转器件"><a href="#PCB如何旋转器件" class="headerlink" title="PCB如何旋转器件"></a>PCB如何旋转器件</h3><p>鼠标拖住之后按空格</p><h3 id="线宽不能设置太大"><a href="#线宽不能设置太大" class="headerlink" title="线宽不能设置太大"></a>线宽不能设置太大</h3><p>按 D-&gt;R 进入设置   调整最大宽度就ok了</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216160637262.png" alt="image-20230216160637262"></p><h3 id="放置和设置过孔大小"><a href="#放置和设置过孔大小" class="headerlink" title="放置和设置过孔大小"></a>放置和设置过孔大小</h3><p>快捷键 p-&gt;v  左键放置</p><p>设置大小   双击过孔进行设置  50是直径     28是口尺寸</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216161846423.png" alt="image-20230216161846423"></p><h3 id="修改默认线宽"><a href="#修改默认线宽" class="headerlink" title="修改默认线宽"></a>修改默认线宽</h3><p>在布线前直接在设计规则中设置：Design-Rules-Routing-Width,修改这个里面的Preferred Width即可</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216162659725.png" alt="image-20230216162659725"></p><h3 id="修改过孔大小"><a href="#修改过孔大小" class="headerlink" title="修改过孔大小"></a>修改过孔大小</h3><p>d-&gt;r 进入设置打开图示界面进行修改  修改之后 在按 p v 快捷键放置过孔之前  先按tab 设置过孔的大小 之后放置的都是这一个大小的了。</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216171020666.png" alt="image-20230216171020666"></p>]]></content>
+        <content type="html"><![CDATA[<h3 id="布线快捷键"><a href="#布线快捷键" class="headerlink" title="布线快捷键"></a>布线快捷键</h3><p><strong>ctrl+w</strong></p><h3 id="PCB如何旋转器件"><a href="#PCB如何旋转器件" class="headerlink" title="PCB如何旋转器件"></a>PCB如何旋转器件</h3><p>鼠标拖住之后按空格</p><h3 id="线宽不能设置太大"><a href="#线宽不能设置太大" class="headerlink" title="线宽不能设置太大"></a>线宽不能设置太大</h3><p>按 D-&gt;R 进入设置   调整最大宽度就ok了</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216160637262.png" alt="image-20230216160637262"></p><h3 id="放置和设置过孔大小"><a href="#放置和设置过孔大小" class="headerlink" title="放置和设置过孔大小"></a>放置和设置过孔大小</h3><p>快捷键 p-&gt;v  左键放置</p><p>设置大小   双击过孔进行设置  50是直径     28是口尺寸</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216161846423.png" alt="image-20230216161846423"></p><h3 id="修改默认线宽"><a href="#修改默认线宽" class="headerlink" title="修改默认线宽"></a>修改默认线宽</h3><p>在布线前直接在设计规则中设置：Design-Rules-Routing-Width,修改这个里面的Preferred Width即可</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216162659725.png" alt="image-20230216162659725"></p><h3 id="修改过孔大小"><a href="#修改过孔大小" class="headerlink" title="修改过孔大小"></a>修改过孔大小</h3><p>d-&gt;r 进入设置打开图示界面进行修改  修改之后 在按 p v 快捷键放置过孔之前  先按tab 设置过孔的大小 之后放置的都是这一个大小的了。</p><p><img src="/2023/02/16/%E7%94%BBPCB%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/image-20230216171020666.png" alt="image-20230216171020666"></p>]]></content>
       
       
       
