@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="双目摄像头hbv-1780-2的基本使用, Wyt-Blog">
+    <meta name="keywords" content="双目摄像头基本使用, Wyt-Blog">
     <meta name="description" content="打开摄像头 使用的是python的opencv
  本摄像头图像为1280×480
 import cv2
@@ -23,7 +23,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH,">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>双目摄像头hbv-1780-2的基本使用 | Wyt-Blog</title>
+    <title>双目摄像头基本使用 | Wyt-Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -338,12 +338,12 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH,">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">双目摄像头hbv-1780-2的基本使用</h1>
+                    <h1 class="description center-align post-title">双目摄像头基本使用</h1>
                 </div>
             </div>
         </div>
@@ -397,7 +397,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH,">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    221
+                    301
                 </div>
                 
 
@@ -442,8 +442,35 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
 
 <p>双目摄像头 其实就是将左右两个镜头拍到的图像进行一个拼接，一张120×120和一张120×120的图片拼接成一张240×120的图片。</p>
 <p>如果想要分别查看左右镜头的图像可以将拍到的一张图片进行剪切剪成两张图片去显示。</p>
-<p>调试了一下午+ 一晚上 最后问了淘宝客服 发现要同时插上2根线才可以同时打开2个摄像头。嗯。。</p>
-<p>只能等到学校再找一根usb线了。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2
+cap1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">+</span> cv2<span class="token punctuation">.</span>CAP_DSHOW<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap1<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>  <span class="token comment"># 这里Property identifier要求是int</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap1<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>  <span class="token comment"># 见下图,3表示CV_CAP_PROP_FRAME_WIDTH,设为270.（设为1和270的效果一样）</span>
+<span class="token comment"># 注意顺序，先设置分辨率，再实例化另一个摄像头。否则依旧报错。</span>
+cap2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">+</span> cv2<span class="token punctuation">.</span>CAP_DSHOW<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap2<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap2<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>
+ret1<span class="token punctuation">,</span> frame1 <span class="token operator">=</span> cap1<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ret2<span class="token punctuation">,</span> frame2 <span class="token operator">=</span> cap2<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">while</span> ret1 <span class="token keyword">and</span> ret2<span class="token punctuation">:</span>
+    ret1<span class="token punctuation">,</span> frame1 <span class="token operator">=</span> cap1<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ret2<span class="token punctuation">,</span> frame2 <span class="token operator">=</span> cap2<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'frame1'</span><span class="token punctuation">,</span> frame1<span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'frame2'</span><span class="token punctuation">,</span> frame2<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+cap1<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cap2<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
+
 
                 
             </div>
@@ -552,18 +579,17 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/17/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4hbv-1780-2%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+                <a href="/2023/02/18/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="双目摄像头hbv-1780-2的基本使用">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Python多线程学习">
                         
-                        <span class="card-title">双目摄像头hbv-1780-2的基本使用</span>
+                        <span class="card-title">Python多线程学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -573,9 +599,9 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-18
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -584,12 +610,11 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4/">
-                        <span class="chip bg-color">双目摄像头</span>
+                    <a href="/tags/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">Python多线程</span>
                     </a>
                     
                 </div>
@@ -832,7 +857,7 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">12.7k</span>
+                        class="white-color">12.8k</span>
             
             
             
