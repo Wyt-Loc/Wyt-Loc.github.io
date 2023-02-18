@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>双目摄像头hbv-1780-2的基本使用</title>
+      <link href="/2023/02/17/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4hbv-1780-2%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/02/17/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4hbv-1780-2%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<p>打开摄像头 使用的是python的<code>opencv</code></p><p> 本摄像头图像为1280×480</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2 <span class="token comment">#定义摄像头</span>cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>cap<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>CAP_PROP_FRAME_WIDTH<span class="token punctuation">,</span> <span class="token number">1280</span><span class="token punctuation">)</span>cap<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>CAP_PROP_FRAME_HEIGHT<span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>    ret<span class="token punctuation">,</span> frame <span class="token operator">=</span> cap<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">#读取每一帧</span>    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'shuai ge'</span><span class="token punctuation">,</span> frame<span class="token punctuation">)</span>    <span class="token comment">#显示每一帧</span>    <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"q"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">break</span>cap<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>   <span class="token comment">#释放摄像头</span>cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">#销毁窗口</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>双目摄像头 其实就是将左右两个镜头拍到的图像进行一个拼接，一张120×120和一张120×120的图片拼接成一张240×120的图片。</p><p>如果想要分别查看左右镜头的图像可以将拍到的一张图片进行剪切剪成两张图片去显示。</p><p>调试了一下午+ 一晚上 最后问了淘宝客服 发现要同时插上2根线才可以同时打开2个摄像头。嗯。。</p><p>只能等到学校再找一根usb线了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 双目摄像头 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PCB板的13层</title>
+      <link href="/2023/02/17/PCB%E6%9D%BF%E7%9A%8413%E5%B1%82/"/>
+      <url>/2023/02/17/PCB%E6%9D%BF%E7%9A%8413%E5%B1%82/</url>
+      
+        <content type="html"><![CDATA[<p>​    </p><p>​    <strong>Top Layer(顶层)、Bottom Layer（底层）两个信号层：用于建立电气连接的铜箔层</strong></p><hr><p>​    <strong>Mechanical 1 (机械层)：用于设置pcb与机械加工有关的参数，以及用于pcb3d模型的放置与显示</strong></p><hr><p>​    <strong>Top Overlay(顶层丝印层)、Bottom Overlay(底层丝印层)：用于添加电路板文字说明</strong></p><hr><p>​    <strong>Top Paste（顶层锡膏防护层）、Bottom Paste(迪岑锡膏防护层)：用于添加露在电路板外的铜</strong></p><hr><p>​    <strong>Top Solder(顶层阻焊层)、Bottm Soledr(底层阻焊层):用于添加电路板的绿油覆盖</strong></p><hr><p>​    <strong>Drillguide （过孔引导层）：用于设置钻孔信息</strong></p><hr><p>​    <strong>Keep-Out Layer（禁止布线层）：用于设立布线范围</strong></p><hr><p>​    <strong>Drillerawing（过孔钻孔层）：用于查看钻孔孔径</strong></p><hr><p>​    <strong>Multi-Layer（多层同时显示）：可实现多层叠加显示，用于显示多个电路板层相关的细节</strong></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PCB </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>耗时三天画完第一块板子</title>
       <link href="/2023/02/17/%E8%80%97%E6%97%B6%E4%B8%89%E5%A4%A9%E7%94%BB%E5%AE%8C%E7%AC%AC%E4%B8%80%E5%9D%97%E6%9D%BF%E5%AD%90/"/>
       <url>/2023/02/17/%E8%80%97%E6%97%B6%E4%B8%89%E5%A4%A9%E7%94%BB%E5%AE%8C%E7%AC%AC%E4%B8%80%E5%9D%97%E6%9D%BF%E5%AD%90/</url>
