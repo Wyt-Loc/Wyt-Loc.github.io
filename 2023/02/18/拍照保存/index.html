@@ -5,7 +5,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="拍照保存, Wyt-Blog">
-    <meta name="description" content="">
+    <meta name="description" content="z  键盘上按 s 键进行拍照
+按q退出
+记得自己创建一个img文件夹存图片
+import cv2
+import time
+
+
+AUTO = False  # 自动拍照，或手动按s键拍照
+INTERVAL = 2 # 自动拍照间隔
+
+fol">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -359,9 +369,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4/">
+                                <span class="chip bg-color">双目摄像头</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -380,14 +394,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-18
+                    2023-02-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    252
                 </div>
                 
 
@@ -412,7 +426,65 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>z  键盘上按 s 键进行拍照</p>
+<p>按q退出</p>
+<p>记得自己创建一个img文件夹存图片</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2
+<span class="token keyword">import</span> time
+
+
+AUTO <span class="token operator">=</span> <span class="token boolean">False</span>  <span class="token comment"># 自动拍照，或手动按s键拍照</span>
+INTERVAL <span class="token operator">=</span> <span class="token number">2</span> <span class="token comment"># 自动拍照间隔</span>
+
+folder <span class="token operator">=</span> <span class="token string">"./img/"</span> <span class="token comment"># 拍照文件目录</span>
+
+<span class="token keyword">def</span> <span class="token function">shot</span><span class="token punctuation">(</span>pos<span class="token punctuation">,</span> frame<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> counter
+    path <span class="token operator">=</span> folder <span class="token operator">+</span> pos <span class="token operator">+</span> <span class="token string">"_"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>counter<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".jpg"</span>
+
+    cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span>path<span class="token punctuation">,</span> frame<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"snapshot saved into: "</span> <span class="token operator">+</span> path<span class="token punctuation">)</span>
+
+counter <span class="token operator">=</span> <span class="token number">0</span>
+utc <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+cap1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> cv2<span class="token punctuation">.</span>CAP_DSHOW<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap1<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>  <span class="token comment"># 这里Property identifier要求是int</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap1<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>  <span class="token comment"># 见下图,3表示CV_CAP_PROP_FRAME_WIDTH,设为270.（设为1和270的效果一样）</span>
+<span class="token comment"># 注意顺序，先设置分辨率，再实例化另一个摄像头。否则依旧报错。</span>
+cap2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">+</span> cv2<span class="token punctuation">.</span>CAP_DSHOW<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap2<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>cap2<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">640</span><span class="token punctuation">)</span>
+
+
+ret1<span class="token punctuation">,</span> frame1 <span class="token operator">=</span> cap1<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+ret2<span class="token punctuation">,</span> frame2 <span class="token operator">=</span> cap2<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">while</span> ret1 <span class="token keyword">and</span> ret2<span class="token punctuation">:</span>
+    ret1<span class="token punctuation">,</span> frame1 <span class="token operator">=</span> cap1<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ret2<span class="token punctuation">,</span> frame2 <span class="token operator">=</span> cap2<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'frame1'</span><span class="token punctuation">,</span> frame1<span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'frame2'</span><span class="token punctuation">,</span> frame2<span class="token punctuation">)</span>
+
+    now <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> AUTO <span class="token keyword">and</span> now <span class="token operator">-</span> utc <span class="token operator">>=</span> INTERVAL<span class="token punctuation">:</span>
+        shot<span class="token punctuation">(</span><span class="token string">"left"</span><span class="token punctuation">,</span> frame1<span class="token punctuation">)</span>
+        shot<span class="token punctuation">(</span><span class="token string">"right"</span><span class="token punctuation">,</span> frame2<span class="token punctuation">)</span>
+        counter <span class="token operator">+=</span> <span class="token number">1</span>
+        utc <span class="token operator">=</span> now
+
+    key <span class="token operator">=</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> key <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"q"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">elif</span> key <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"s"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        shot<span class="token punctuation">(</span><span class="token string">"left"</span><span class="token punctuation">,</span> frame1<span class="token punctuation">)</span>
+        shot<span class="token punctuation">(</span><span class="token string">"right"</span><span class="token punctuation">,</span> frame2<span class="token punctuation">)</span>
+        counter <span class="token operator">+=</span> <span class="token number">1</span>
+
+
+cap1<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cap2<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -475,7 +547,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4/">
+                                    <span class="chip bg-color">双目摄像头</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -794,7 +870,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.6k</span>
+                        class="white-color">17.5k</span>
             
             
             
