@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Linux学习</title>
+      <link href="/2023/03/01/Linux%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2023/03/01/Linux%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个芯片不能接2个步进电机地线的问题</title>
+      <link href="/2023/03/01/%E4%B8%80%E4%B8%AA%E8%8A%AF%E7%89%87%E4%B8%8D%E8%83%BD%E6%8E%A52%E4%B8%AA%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E5%9C%B0%E7%BA%BF%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/03/01/%E4%B8%80%E4%B8%AA%E8%8A%AF%E7%89%87%E4%B8%8D%E8%83%BD%E6%8E%A52%E4%B8%AA%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E5%9C%B0%E7%BA%BF%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>​    遇到一个很奇怪的问题，但是想想也有道理，一个芯片接了两个步进电机 其中每个步进电机都有一块电源去供电，但是这时候问题出现了，一个芯片只能有一个步进电机转，查了很久发现是地线错了，猜测是步进电机驱动器不能找到基准电压了，一个芯片有两个步进电机的电压，在此写个博客，加深以下印象。防止以后再犯 。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 步进电机 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux常用命令</title>
       <link href="/2023/02/26/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
       <url>/2023/02/26/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
