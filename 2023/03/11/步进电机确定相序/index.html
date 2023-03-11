@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: SPI使用, Wyt-Blog">
-    <meta name="description" content="本博客建立是出于个人爱好，记录日常学习所用">
+    <meta name="keywords" content="步进电机确定相序, Wyt-Blog">
+    <meta name="description" content="问题处出
+新买的电机，拿来发现菜单就3个选项，并且校准是一直来回抖动，去问店家得知是相序的问题，测相序的方法如下
+方法一：先将步进电机的4条线分开，用手转动电机轴，感觉一下此时的阻力。然后将步进电机的任意两条线短接在一起，此时再用手拧电机轴">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: SPI使用 | Wyt-Blog</title>
+    <title>步进电机确定相序 | Wyt-Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -328,304 +330,420 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">步进电机确定相序</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
     <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                    subtitle
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="tags" class="container chip-container">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BAAB%E7%9B%B8-%E4%B8%8E-%E7%BC%96%E7%A0%81%E5%99%A8AB%E7%9B%B8/">
+                                <span class="chip bg-color">步进电机AB相 与 编码器AB相</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
             </div>
-            <div class="tag-chips">
+
+            <div class="post-info">
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-11
+                </div>
                 
-                <a href="/tags/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83/" title="文章发布: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="文章发布" style="background-color: #F9EBEA;">文章发布
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
+
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-03-11
+                </div>
                 
-                <a href="/tags/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/" title="网站部署测试: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="网站部署测试" style="background-color: #F5EEF8;">网站部署测试
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
+
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    706
+                </div>
                 
-                <a href="/tags/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%96%B9%E6%B3%95/" title="图片显示方法: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="图片显示方法" style="background-color: #D5F5E3;">图片显示方法
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
+
                 
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
-                <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/" title="FreeRTOS学习: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="FreeRTOS学习" style="background-color: #E8F8F5;">FreeRTOS学习
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%A0%86%E5%86%85%E5%AD%98%E5%92%8C%E6%A0%88%E5%86%85%E5%AD%98/" title="堆内存和栈内存: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="堆内存和栈内存" style="background-color: #FEF9E7;">堆内存和栈内存
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%BB%93%E6%9E%84%E4%BD%93%E5%AD%A6%E4%B9%A0/" title="结构体学习: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="结构体学习" style="background-color: #F8F9F9;">结构体学习
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/SPI%E4%BD%BF%E7%94%A8/" title="SPI使用: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="SPI使用" style="background-color: #82E0AA;">SPI使用
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91-%E4%B8%9A%E4%BD%99/" title="游戏开发--业余: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="游戏开发--业余" style="background-color: #D7BDE2;">游戏开发--业余
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9/" title="软件工程知识点: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="软件工程知识点" style="background-color: #A3E4D7;">软件工程知识点
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA/" title="步进电机: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="步进电机" style="background-color: #85C1E9;">步进电机
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/PCB%E5%AD%A6%E4%B9%A0/" title="PCB学习: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="PCB学习" style="background-color: #F8C471;">PCB学习
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/PCB/" title="PCB: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="PCB" style="background-color: #F9E79F;">PCB
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4/" title="双目摄像头: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="双目摄像头" style="background-color: #A3E4D7;">双目摄像头
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Python多线程: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Python多线程" style="background-color: #F8F9F9;">Python多线程
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/" title="无人机: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="无人机" style="background-color: #D5F5E3;">无人机
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%8C%87%E9%92%88/" title="指针: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="指针" style="background-color: #FEF9E7;">指针
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E4%BA%8C%E4%BD%8D%E6%95%B0%E7%BB%84/" title="二位数组: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="二位数组" style="background-color: #D7BDE2;">二位数组
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/PWM/" title="PWM: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="PWM" style="background-color: #E8F8F5;">PWM
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Linux/" title="Linux: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" style="background-color: #E8F8F5;">Linux
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" title="编译原理: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="编译原理" style="background-color: #F9E79F;">编译原理
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%90%86%E8%A7%A3TCP-IP/" title="理解TCP/IP: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="理解TCP/IP" style="background-color: #D7BDE2;">理解TCP/IP
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BAAB%E7%9B%B8-%E4%B8%8E-%E7%BC%96%E7%A0%81%E5%99%A8AB%E7%9B%B8/" title="步进电机AB相 与 编码器AB相: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="步进电机AB相 与 编码器AB相" style="background-color: #F9EBEA;">步进电机AB相 与 编码器AB相
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
+
                 
             </div>
         </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>问题处出</p>
+<p>新买的电机，拿来发现菜单就3个选项，并且校准是一直来回抖动，去问店家得知是相序的问题，测相序的方法如下</p>
+<p><strong>方法一：</strong>先将步进电机的4条线分开，用手转动电机轴，感觉一下此时的阻力。然后将步进电机的任意两条线短接在一起，此时再用手拧电机轴，如果感觉阻力与刚才一样，则可判断这两条线不是同一相；如果感觉阻力比刚才有明显的增加，则可判断这两条线是同一相，可接在驱动器A+、A-，另外两条线则接在B+和B-。AB部分，正负不分。</p>
+<p>**方法二:**用万用表。量一下电机其中的两根线，有阻值的为一相。可接在驱动器A+、A-，另外两条线则接在B+和B-。AB部分，正负不分。</p>
+<h2 id="步进电机的AB相"><a href="#步进电机的AB相" class="headerlink" title="步进电机的AB相"></a>步进电机的AB相</h2><p><strong>两相步进电机，对应接到A+、A-,B+和B-,那么按照以下操作</strong></p>
+<p>步进电机上的“A+A-B+B-”就是电机的驱动线，“A+”、“ A-”代表一相，“B+”、“B-”代表另一相。</p>
+<p>步进电机的定子是几个串联的线圈构成的磁体。有两个线圈绕组，每个线圈两个头，出线一般是四条线标记为A+，A-，B+，B-。</p>
+<p>步进电机按照特定的时序激磁，电机就能沿逆时针方向连续旋转。改变激磁时序，电机将沿顺时针方向连续旋转。</p>
+<p>其工作的激磁次序为：</p>
+<p>正向：A+ → A- ，B+ → B- ，A+ ← A- ，B+ ← B-</p>
+<p>反向：A+ → A- ，B+ ← B- ，A+ ← A- ，B+ → B-</p>
+<p>两相步进电机转向变换：只需将电机与驱动器接线的A+和A-（或者B+和B-）对调即可。</p>
+<p>如果是第一次接线，一定要确认好电机的相位线，或者按照图纸接线，切记两相步进电机的A+A-和B+B-千万不能接错，如果接错可能造成电机堵转，严重的话电机烧毁。</p>
+<h2 id="编码器的AB相"><a href="#编码器的AB相" class="headerlink" title="编码器的AB相"></a>编码器的AB相</h2><p>A,B两相是两组脉冲输出，其相差相位角90度。 一组脉冲每两个脉冲上升沿之间为一个脉冲周期，也就是相位角360度，90度相位角是1/4个脉冲周期。 通过判断A相提前于B相1/4脉冲周期或落后于B相1/4周期，可以判断编码器的旋转方向，在计数中可以判断增量加，还是减。 在测速中，用一相就可以了，如果要判断旋转方向，有负速度值，就要用到两相。 利用A,B两相位差及脉冲的上升下降沿的排列，可以将编码器的每圈输出脉冲数4倍频。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Wyt</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wyt-loc.github.io/2023/03/11/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E7%A1%AE%E5%AE%9A%E7%9B%B8%E5%BA%8F/">https://wyt-loc.github.io/2023/03/11/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E7%A1%AE%E5%AE%9A%E7%9B%B8%E5%BA%8F/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Wyt</a>
+                    !
+                </span>
+            </div>
+        
     </div>
-</div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BAAB%E7%9B%B8-%E4%B8%8E-%E7%BC%96%E7%A0%81%E5%99%A8AB%E7%9B%B8/">
+                                    <span class="chip bg-color">步进电机AB相 与 编码器AB相</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="SPI使用" data-aos="fade-up">
-                <div class="card">
-                    <a href="/2023/02/09/STM32F1-SPI%E4%BD%BF%E7%94%A8/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="STM32F1_SPI使用">
-                            
-                            <span class="card-title">STM32F1_SPI使用</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Wyt
-                                
-                            </span>
-                        </div>
-                    </div>
+    
+
+</div>
+
                 </div>
             </div>
             
         </div>
-    </article>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/03/11/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E7%A1%AE%E5%AE%9A%E7%9B%B8%E5%BA%8F/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="步进电机确定相序">
+                        
+                        <span class="card-title">步进电机确定相序</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Wyt
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BAAB%E7%9B%B8-%E4%B8%8E-%E7%BC%96%E7%A0%81%E5%99%A8AB%E7%9B%B8/">
+                        <span class="chip bg-color">步进电机AB相 与 编码器AB相</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/08/%E4%BB%80%E4%B9%88%E6%98%AF%E9%B2%81%E6%A3%92%E6%80%A7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="什么是鲁棒性">
+                        
+                        <span class="card-title">什么是鲁棒性</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Wyt
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/">
+                        <span class="chip bg-color">无人机</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
 </main>
 
 
