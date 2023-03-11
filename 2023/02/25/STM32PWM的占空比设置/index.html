@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta name="keywords" content="STM32PWM的占空比设置, Wyt-Blog">
     <meta name="description" content="z在小车制作过程中，需要设置电机的转速，那么就不可避免的要用到PWM来控制。
-关于PWM占空比的设置，简单做个记录。
-首先初始化定时器
-//这里使用的是定时器3!
-//TIM3挂在APB2上，所以这里时钟选择为APB1的2倍，而APB1为3">
+//常用的函数 及 计算公式
+//PWM初始化函数
+TIM_7_init(7199,9999); //arr=9999, psc=7199
+//用来设置占空比的函">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -388,14 +388,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-25
+                    2023-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    727
+                    769
                 </div>
                 
 
@@ -421,7 +421,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>z在小车制作过程中，需要设置电机的转速，那么就不可避免的要用到PWM来控制。</p>
-<p>关于PWM占空比的设置，简单做个记录。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//常用的函数 及 计算公式</span>
+<span class="token comment">//PWM初始化函数</span>
+<span class="token function">TIM_7_init</span><span class="token punctuation">(</span><span class="token number">7199</span><span class="token punctuation">,</span><span class="token number">9999</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//arr=9999, psc=7199</span>
+<span class="token comment">//用来设置占空比的函数 </span>
+<span class="token function">TIM_SetCompare1</span><span class="token punctuation">(</span>TIM3<span class="token punctuation">,</span>parameter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//占空比 = 1 - parameter / (arr + 1)</span>
+<span class="token comment">//周期 = [ (arr+1) * (psc+1) ] / 72000KHz = T（ms） </span>
+<span class="token comment">//频率 = 1 / 周期</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>首先初始化定时器</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//这里使用的是定时器3!</span>
 <span class="token comment">//TIM3挂在APB2上，所以这里时钟选择为APB1的2倍，而APB1为36M</span>
@@ -504,7 +512,6 @@
 
 <span class="token function">TIM_SetCompare1</span><span class="token punctuation">(</span>TIM1<span class="token punctuation">,</span><span class="token number">3599</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置TIMx捕获比较1寄存器值  此处为TIM1通道1 占空比为50%</span>
 <span class="token function">TIM_SetCompare4</span><span class="token punctuation">(</span>TIM1<span class="token punctuation">,</span><span class="token number">3599</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置TIMx捕获比较4寄存器值  此处为TIM1通道4 占空比为50%</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
 
                 
@@ -896,7 +903,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">36.2k</span>
+                        class="white-color">37.2k</span>
             
             
             
