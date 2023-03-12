@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Wyt-Blog">
-    <meta name="description" content="本博客建立是出于个人爱好，记录日常学习所用">
+    <meta name="description" content="�?博�?�建立是出于�?人爱好，记录日常学习所�?">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -167,7 +167,7 @@
         <div class="logo-name">Wyt-Blog</div>
         <div class="logo-desc">
             
-            本博客建立是出于个人爱好，记录日常学习所用
+            �?博�?�建立是出于�?人爱好，记录日常学习所�?
             
         </div>
     </div>
@@ -385,6 +385,51 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/03/01/%E4%B8%80%E4%B8%AA%E8%8A%AF%E7%89%87%E4%B8%8D%E8%83%BD%E6%8E%A52%E4%B8%AA%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E5%9C%B0%E7%BA%BF%E7%9A%84%E9%97%AE%E9%A2%98/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="一个芯片不能接2个步进电机地线的问题">
+                            
+                            <span class="card-title">一个芯片不能接2个步进电机地线的问题</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                ​    遇到一个很奇怪的问题，但是想想也有道理，一个芯片接了两个步进电机 其中每个步进电机都有一块电源去供电，但是这时候问题出现了，一个芯片只能有一个步进电机转，查了很久发现是地线错了，猜测是步进电机驱动器不能找到基准电压了，一个芯片有两
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Wyt
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA/">
+                            <span class="chip bg-color">步进电机</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
             
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
@@ -629,56 +674,6 @@ int (*p)[4] = _error;  //创建一个指针 指向二维数组_error
                                 姿态解算自带一个dmp 但是由于dmp数据读取需要从FIFO读取，极容易发生堵塞溢出，所以干脆自己写一个姿态解算。
 首先 MPU6050的几个主要配置如下
 MPU_Set_Gyro_Fsr(3);					//陀螺仪传感器,±2000dps
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Wyt
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
-                            <span class="chip bg-color">FreeRTOS学习</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/">
-                            <span class="chip bg-color">无人机</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/20/%E8%A7%A3%E5%86%B3mpu6050%E7%A7%BB%E6%A4%8DFreeRTOS%E7%9A%84%E9%97%AE%E9%A2%98/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="解决mpu6050移植FreeRTOS的问题">
-                            
-                            <span class="card-title">解决mpu6050移植FreeRTOS的问题</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                j 今天终于是弄掉了这个困扰了2天的大麻烦，mpu6050移植了FreeRTOS之后一直读取不到数据，原因居然是正点原子的delay函数被FreeRTOS认为成了任务切换造成进程堵塞。所以把delay函数全部改成rtos里的就OK了
-但是 
                             
                         </div>
                         <div class="publish-info">

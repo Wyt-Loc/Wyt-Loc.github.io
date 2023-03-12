@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>对PID的理解</title>
+      <link href="/2023/03/11/%E5%AF%B9PID%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+      <url>/2023/03/11/%E5%AF%B9PID%E7%9A%84%E7%90%86%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<p>​    </p><p>对PID的解释大概就是这张图</p><p><img src="/%E5%AF%B9PID%E7%9A%84%E7%90%86%E8%A7%A3/image-20230311232353308.png" alt="image-20230311232353308"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> PID </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>步进电机确定相序</title>
       <link href="/2023/03/11/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E7%A1%AE%E5%AE%9A%E7%9B%B8%E5%BA%8F/"/>
       <url>/2023/03/11/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E7%A1%AE%E5%AE%9A%E7%9B%B8%E5%BA%8F/</url>
