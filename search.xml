@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>小车SPI通信之路行不通解决办法</title>
+      <link href="/2023/03/13/%E5%B0%8F%E8%BD%A6SPI%E9%80%9A%E4%BF%A1%E4%B9%8B%E8%B7%AF%E8%A1%8C%E4%B8%8D%E9%80%9A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+      <url>/2023/03/13/%E5%B0%8F%E8%BD%A6SPI%E9%80%9A%E4%BF%A1%E4%B9%8B%E8%B7%AF%E8%A1%8C%E4%B8%8D%E9%80%9A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>小车弄了将近半个月，SPI通信仍然有犯错的时候，一直怀疑是线路的问题，但是有没有好的排查方法，SPI协议拿来看视频的没问题，按理说不会出现传输卡顿，几个字节的数据也不可能卡。最近马上进行比赛，要求把车带上台演示，</p><p>不得已直接换一个简单粗暴的方法控制得了。</p><p>在这打一个断点，先中断一下子，等到比赛结束之后再回来继续研究SPI为啥总是会移位。 </p><p><img src="/2023/03/13/%E5%B0%8F%E8%BD%A6SPI%E9%80%9A%E4%BF%A1%E4%B9%8B%E8%B7%AF%E8%A1%8C%E4%B8%8D%E9%80%9A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/abb4537f7fdd6950635e9b01cfdf467.jpg" alt="abb4537f7fdd6950635e9b01cfdf467"></p><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 3月13日新思路     称她为简单粗暴直接控制法</span><span class="token comment">//由于 每次一到原地旋转就不好使了 所以针对这情况 不用api来控制 原地旋转了</span><span class="token comment">//直接 拉出3根线来   专门控制这两个动作   一根线负责高低电平的变化， 另外2根  可以组合出4种情况  </span><span class="token comment">//由于左转 右转 的情况不太好进行设置 所以暂时 只用来控制原地旋转和复位</span><span class="token comment">//如果原地旋转 那么  主节点设置控制电平的线从低电平变为高电平。</span><span class="token comment">//从此刻开始检测 另外2根线的电平是什么，肯定会得到4种情况里的一种。  随便定义2种情况作为 旋转 和 复位。</span><span class="token comment">// 在此定义一个  标志位flag初始值为 0  一旦得出是什么动作  就会将这个 标志位flag 就会置 1 , </span><span class="token comment">//当电平线 从高电平被拉为低电平后  flag = 0 在此恢复flag 位，  至此想象中这个问题应该可以解决。</span><span class="token comment">//设置E2 脚电平控制线  E3 和 E4 来控制是旋转还是复位</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 项目记录 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SPI调试记录</title>
+      <link href="/2023/03/12/SPI%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/"/>
+      <url>/2023/03/12/SPI%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/SPI%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/image-20230312224808690.png" alt="image-20230312224808690"></p><p>NSS配置参考网址：</p><p> <a href="https://www.bilibili.com/read/cv3496693">https://www.bilibili.com/read/cv3496693</a></p><p>如果是软件模式</p><p>则 通信过程应为：</p><p>主机定义  3个引脚即可    CLK    MOSI    MISO</p><p>从机</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> SPI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>对PID的理解</title>
       <link href="/2023/03/11/%E5%AF%B9PID%E7%9A%84%E7%90%86%E8%A7%A3/"/>
       <url>/2023/03/11/%E5%AF%B9PID%E7%9A%84%E7%90%86%E8%A7%A3/</url>
