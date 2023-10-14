@@ -1,0 +1,1825 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="linux常用命令, Wyt-Blog">
+    <meta name="description" content="修改过设置 可能会有不同
+
+
+
+命令
+功能说明
+
+
+
+线上查询及帮助命令 (2 个)
+
+
+
+man
+查看命令帮助，命令的词典，更复杂的还有 info，但不常用。
+
+
+help
+查看 Linux 内置命令的帮助，比如 cd 命令。
+
+
+文件和">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>linux常用命令 | Wyt-Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Wyt-Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Wyt-Blog</div>
+        <div class="logo-desc">
+            
+            �?博�?�建立是出于�?人爱好，记录日常学习所�?
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Wyt-Loc/Wyt-Loc.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Wyt-Loc/Wyt-Loc.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">linux常用命令</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-02-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-02-26
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>修改过设置 可能会有不同</p>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">线上查询及帮助命令 (2 个)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">man</td>
+<td align="left">查看命令帮助，命令的词典，更复杂的还有 info，但不常用。</td>
+</tr>
+<tr>
+<td align="left">help</td>
+<td align="left">查看 Linux 内置命令的帮助，比如 cd 命令。</td>
+</tr>
+<tr>
+<td align="left">文件和目录操作命令 (18 个)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">ls</td>
+<td align="left">全拼 list，功能是列出目录的内容及其内容属性信息。</td>
+</tr>
+<tr>
+<td align="left">cd</td>
+<td align="left">全拼 change directory，功能是从当前工作目录切换到指定的工作目录。</td>
+</tr>
+<tr>
+<td align="left">cp</td>
+<td align="left">全拼 copy，其功能为复制文件或目录。</td>
+</tr>
+<tr>
+<td align="left">find</td>
+<td align="left">查找的意思，用于查找目录及目录下的文件。</td>
+</tr>
+<tr>
+<td align="left">mkdir</td>
+<td align="left">全拼 make directories，其功能是创建目录。</td>
+</tr>
+<tr>
+<td align="left">mv</td>
+<td align="left">全拼 move，其功能是移动或重命名文件。</td>
+</tr>
+<tr>
+<td align="left">pwd</td>
+<td align="left">全拼 print working directory，其功能是显示当前工作目录的绝对路径。</td>
+</tr>
+<tr>
+<td align="left">rename</td>
+<td align="left">用于重命名文件。</td>
+</tr>
+<tr>
+<td align="left">rm</td>
+<td align="left">全拼 remove，其功能是删除一个或多个文件或目录。</td>
+</tr>
+<tr>
+<td align="left">rmdir</td>
+<td align="left">全拼 remove empty directories，功能是删除空目录。</td>
+</tr>
+<tr>
+<td align="left">touch</td>
+<td align="left">创建新的空文件，改变已有文件的时间戳属性。</td>
+</tr>
+<tr>
+<td align="left">tree</td>
+<td align="left">功能是以树形结构显示目录下的内容。</td>
+</tr>
+<tr>
+<td align="left">basename</td>
+<td align="left">显示文件名或目录名。</td>
+</tr>
+<tr>
+<td align="left">dirname</td>
+<td align="left">显示文件或目录路径。</td>
+</tr>
+<tr>
+<td align="left">chattr</td>
+<td align="left">改变文件的扩展属性。</td>
+</tr>
+<tr>
+<td align="left">lsattr</td>
+<td align="left">查看文件扩展属性。</td>
+</tr>
+<tr>
+<td align="left">file</td>
+<td align="left">显示文件的类型。</td>
+</tr>
+<tr>
+<td align="left">md5sum</td>
+<td align="left">计算和校验文件的 MD5 值。</td>
+</tr>
+<tr>
+<td align="left">查看文件及内容处理命令（21 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">cat</td>
+<td align="left">全拼 concatenate，功能是用于连接多个文件并且打印到屏幕输出或重定向到指定文件中。</td>
+</tr>
+<tr>
+<td align="left">tac</td>
+<td align="left">tac 是 cat 的反向拼写，因此命令的功能为反向显示文件内容。</td>
+</tr>
+<tr>
+<td align="left">more</td>
+<td align="left">分页显示文件内容。</td>
+</tr>
+<tr>
+<td align="left">less</td>
+<td align="left">分页显示文件内容，more 命令的相反用法。</td>
+</tr>
+<tr>
+<td align="left">head</td>
+<td align="left">显示文件内容的头部。</td>
+</tr>
+<tr>
+<td align="left">tail</td>
+<td align="left">显示文件内容的尾部。</td>
+</tr>
+<tr>
+<td align="left">cut</td>
+<td align="left">将文件的每一行按指定分隔符分割并输出。</td>
+</tr>
+<tr>
+<td align="left">split</td>
+<td align="left">分割文件为不同的小片段。</td>
+</tr>
+<tr>
+<td align="left">paste</td>
+<td align="left">按行合并文件内容。</td>
+</tr>
+<tr>
+<td align="left">sort</td>
+<td align="left">对文件的文本内容排序。</td>
+</tr>
+<tr>
+<td align="left">uniq</td>
+<td align="left">去除重复行。oldboy</td>
+</tr>
+<tr>
+<td align="left">wc</td>
+<td align="left">统计文件的行数、单词数或字节数。</td>
+</tr>
+<tr>
+<td align="left">iconv</td>
+<td align="left">转换文件的编码格式。</td>
+</tr>
+<tr>
+<td align="left">dos2unix</td>
+<td align="left">将 DOS 格式文件转换成 UNIX 格式。</td>
+</tr>
+<tr>
+<td align="left">diff</td>
+<td align="left">全拼 difference，比较文件的差异，常用于文本文件。</td>
+</tr>
+<tr>
+<td align="left">vimdiff</td>
+<td align="left">命令行可视化文件比较工具，常用于文本文件。</td>
+</tr>
+<tr>
+<td align="left">rev</td>
+<td align="left">反向输出文件内容。</td>
+</tr>
+<tr>
+<td align="left">grep/egrep</td>
+<td align="left">过滤字符串，三剑客老三。</td>
+</tr>
+<tr>
+<td align="left">join</td>
+<td align="left">按两个文件的相同字段合并。</td>
+</tr>
+<tr>
+<td align="left">tr</td>
+<td align="left">替换或删除字符。</td>
+</tr>
+<tr>
+<td align="left">vi/vim</td>
+<td align="left">命令行文本编辑器。</td>
+</tr>
+<tr>
+<td align="left">文件压缩及解压缩命令（4 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">tar</td>
+<td align="left">打包压缩。oldboy</td>
+</tr>
+<tr>
+<td align="left">unzip</td>
+<td align="left">解压文件。</td>
+</tr>
+<tr>
+<td align="left">gzip</td>
+<td align="left">gzip 压缩工具。</td>
+</tr>
+<tr>
+<td align="left">zip</td>
+<td align="left">压缩工具。</td>
+</tr>
+<tr>
+<td align="left">信息显示命令（11 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">uname</td>
+<td align="left">显示操作系统相关信息的命令。</td>
+</tr>
+<tr>
+<td align="left">hostname</td>
+<td align="left">显示或者设置当前系统的主机名。</td>
+</tr>
+<tr>
+<td align="left">dmesg</td>
+<td align="left">显示开机信息，用于诊断系统故障。</td>
+</tr>
+<tr>
+<td align="left">uptime</td>
+<td align="left">显示系统运行时间及负载。</td>
+</tr>
+<tr>
+<td align="left">stat</td>
+<td align="left">显示文件或文件系统的状态。</td>
+</tr>
+<tr>
+<td align="left">du</td>
+<td align="left">计算磁盘空间使用情况。</td>
+</tr>
+<tr>
+<td align="left">df</td>
+<td align="left">报告文件系统磁盘空间的使用情况。</td>
+</tr>
+<tr>
+<td align="left">top</td>
+<td align="left">实时显示系统资源使用情况。</td>
+</tr>
+<tr>
+<td align="left">free</td>
+<td align="left">查看系统内存。</td>
+</tr>
+<tr>
+<td align="left">date</td>
+<td align="left">显示与设置系统时间。</td>
+</tr>
+<tr>
+<td align="left">cal</td>
+<td align="left">查看日历等时间信息。</td>
+</tr>
+<tr>
+<td align="left">搜索文件命令（4 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">which</td>
+<td align="left">查找二进制命令，按环境变量 PATH 路径查找。</td>
+</tr>
+<tr>
+<td align="left">find</td>
+<td align="left">从磁盘遍历查找文件或目录。</td>
+</tr>
+<tr>
+<td align="left">whereis</td>
+<td align="left">查找二进制命令，按环境变量 PATH 路径查找。</td>
+</tr>
+<tr>
+<td align="left">locate</td>
+<td align="left">从数据库 (/var/lib/mlocate/mlocate.db) 查找命令，使用 updatedb 更新库。</td>
+</tr>
+<tr>
+<td align="left">用户管理命令（10 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">useradd</td>
+<td align="left">添加用户。</td>
+</tr>
+<tr>
+<td align="left">usermod</td>
+<td align="left">修改系统已经存在的用户属性。</td>
+</tr>
+<tr>
+<td align="left">userdel</td>
+<td align="left">删除用户。</td>
+</tr>
+<tr>
+<td align="left">groupadd</td>
+<td align="left">添加用户组。</td>
+</tr>
+<tr>
+<td align="left">passwd</td>
+<td align="left">修改用户密码。</td>
+</tr>
+<tr>
+<td align="left">chage</td>
+<td align="left">修改用户密码有效期限。</td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left">查看用户的 uid,gid 及归属的用户组。</td>
+</tr>
+<tr>
+<td align="left">su</td>
+<td align="left">切换用户身份。</td>
+</tr>
+<tr>
+<td align="left">visudo</td>
+<td align="left">编辑 / etc/sudoers 文件的专属命令。</td>
+</tr>
+<tr>
+<td align="left">sudo</td>
+<td align="left">以另外一个用户身份（默认 root 用户）执行事先在 sudoers 文件允许的命令。</td>
+</tr>
+<tr>
+<td align="left">基础网络操作命令（11 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">telnet</td>
+<td align="left">使用 TELNET 协议远程登录。</td>
+</tr>
+<tr>
+<td align="left">ssh</td>
+<td align="left">使用 SSH 加密协议远程登录。</td>
+</tr>
+<tr>
+<td align="left">scp</td>
+<td align="left">全拼 secure copy，用于不同主机之间复制文件。</td>
+</tr>
+<tr>
+<td align="left">wget</td>
+<td align="left">命令行下载文件。</td>
+</tr>
+<tr>
+<td align="left">ping</td>
+<td align="left">测试主机之间网络的连通性。</td>
+</tr>
+<tr>
+<td align="left">route</td>
+<td align="left">显示和设置 linux 系统的路由表。</td>
+</tr>
+<tr>
+<td align="left">ifconfig</td>
+<td align="left">查看、配置、启用或禁用网络接口的命令。</td>
+</tr>
+<tr>
+<td align="left">ifup</td>
+<td align="left">启动网卡。</td>
+</tr>
+<tr>
+<td align="left">ifdown</td>
+<td align="left">关闭网卡。</td>
+</tr>
+<tr>
+<td align="left">netstat</td>
+<td align="left">查看网络状态。</td>
+</tr>
+<tr>
+<td align="left">ss</td>
+<td align="left">查看网络状态。</td>
+</tr>
+<tr>
+<td align="left">深入网络操作命令（9 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">nmap</td>
+<td align="left">网络扫描命令。</td>
+</tr>
+<tr>
+<td align="left">lsof</td>
+<td align="left">全名 list open files，也就是列举系统中已经被打开的文件。</td>
+</tr>
+<tr>
+<td align="left">mail</td>
+<td align="left">发送和接收邮件。</td>
+</tr>
+<tr>
+<td align="left">mutt</td>
+<td align="left">邮件管理命令。</td>
+</tr>
+<tr>
+<td align="left">nslookup</td>
+<td align="left">交互式查询互联网 DNS 服务器的命令。</td>
+</tr>
+<tr>
+<td align="left">dig</td>
+<td align="left">查找 DNS 解析过程。</td>
+</tr>
+<tr>
+<td align="left">host</td>
+<td align="left">查询 DNS 的命令。</td>
+</tr>
+<tr>
+<td align="left">traceroute</td>
+<td align="left">追踪数据传输路由状况。</td>
+</tr>
+<tr>
+<td align="left">tcpdump</td>
+<td align="left">命令行的抓包工具。</td>
+</tr>
+<tr>
+<td align="left">有关磁盘与文件系统的命令（16 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">mount</td>
+<td align="left">挂载文件系统。</td>
+</tr>
+<tr>
+<td align="left">umount</td>
+<td align="left">卸载文件系统。</td>
+</tr>
+<tr>
+<td align="left">fsck</td>
+<td align="left">检查并修复 Linux 文件系统。</td>
+</tr>
+<tr>
+<td align="left">dd</td>
+<td align="left">转换或复制文件。</td>
+</tr>
+<tr>
+<td align="left">dumpe2fs</td>
+<td align="left">导出 ext2/ext3/ext4 文件系统信息。</td>
+</tr>
+<tr>
+<td align="left">dump</td>
+<td align="left">ext2/3/4 文件系统备份工具。</td>
+</tr>
+<tr>
+<td align="left">fdisk</td>
+<td align="left">磁盘分区命令，适用于 2TB 以下磁盘分区。</td>
+</tr>
+<tr>
+<td align="left">parted</td>
+<td align="left">磁盘分区命令，没有磁盘大小限制，常用于 2TB 以下磁盘分区。</td>
+</tr>
+<tr>
+<td align="left">mkfs</td>
+<td align="left">格式化创建 Linux 文件系统。</td>
+</tr>
+<tr>
+<td align="left">partprobe</td>
+<td align="left">更新内核的硬盘分区表信息。</td>
+</tr>
+<tr>
+<td align="left">e2fsck</td>
+<td align="left">检查 ext2/ext3/ext4 类型文件系统。</td>
+</tr>
+<tr>
+<td align="left">mkswap</td>
+<td align="left">创建 Linux 交换分区。</td>
+</tr>
+<tr>
+<td align="left">swapon</td>
+<td align="left">启用交换分区。</td>
+</tr>
+<tr>
+<td align="left">swapoff</td>
+<td align="left">关闭交换分区。</td>
+</tr>
+<tr>
+<td align="left">sync</td>
+<td align="left">将内存缓冲区内的数据写入磁盘。</td>
+</tr>
+<tr>
+<td align="left">resize2fs</td>
+<td align="left">调整 ext2/ext3/ext4 文件系统大小。</td>
+</tr>
+<tr>
+<td align="left">系统权限及用户授权相关命令（4 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">chmod</td>
+<td align="left">改变文件或目录权限。</td>
+</tr>
+<tr>
+<td align="left">chown</td>
+<td align="left">改变文件或目录的属主和属组。</td>
+</tr>
+<tr>
+<td align="left">chgrp</td>
+<td align="left">更改文件用户组。</td>
+</tr>
+<tr>
+<td align="left">umask</td>
+<td align="left">显示或设置权限掩码。</td>
+</tr>
+<tr>
+<td align="left">查看系统用户登陆信息的命令（7 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">whoami</td>
+<td align="left">显示当前有效的用户名称，相当于执行 id -un 命令。</td>
+</tr>
+<tr>
+<td align="left">who</td>
+<td align="left">显示目前登录系统的用户信息。</td>
+</tr>
+<tr>
+<td align="left">w</td>
+<td align="left">显示已经登陆系统的用户列表，并显示用户正在执行的指令。</td>
+</tr>
+<tr>
+<td align="left">last</td>
+<td align="left">显示登入系统的用户。</td>
+</tr>
+<tr>
+<td align="left">lastlog</td>
+<td align="left">显示系统中所有用户最近一次登录信息。</td>
+</tr>
+<tr>
+<td align="left">users</td>
+<td align="left">显示当前登录系统的所有用户的用户列表。</td>
+</tr>
+<tr>
+<td align="left">finger</td>
+<td align="left">查找并显示用户信息。</td>
+</tr>
+<tr>
+<td align="left">内置命令及其它（19 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">echo</td>
+<td align="left">打印变量，或直接输出指定的字符串</td>
+</tr>
+<tr>
+<td align="left">printf</td>
+<td align="left">将结果格式化输出到标准输出。</td>
+</tr>
+<tr>
+<td align="left">rpm</td>
+<td align="left">管理 rpm 包的命令。</td>
+</tr>
+<tr>
+<td align="left">yum</td>
+<td align="left">自动化简单化地管理 rpm 包的命令。</td>
+</tr>
+<tr>
+<td align="left">watch</td>
+<td align="left">周期性的执行给定的命令，并将命令的输出以全屏方式显示。</td>
+</tr>
+<tr>
+<td align="left">alias</td>
+<td align="left">设置系统别名。</td>
+</tr>
+<tr>
+<td align="left">unalias</td>
+<td align="left">取消系统别名。</td>
+</tr>
+<tr>
+<td align="left">date</td>
+<td align="left">查看或设置系统时间。</td>
+</tr>
+<tr>
+<td align="left">clear</td>
+<td align="left">清除屏幕，简称清屏。</td>
+</tr>
+<tr>
+<td align="left">history</td>
+<td align="left">查看命令执行的历史纪录。</td>
+</tr>
+<tr>
+<td align="left">eject</td>
+<td align="left">弹出光驱。</td>
+</tr>
+<tr>
+<td align="left">time</td>
+<td align="left">计算命令执行时间。</td>
+</tr>
+<tr>
+<td align="left">nc</td>
+<td align="left">功能强大的网络工具。</td>
+</tr>
+<tr>
+<td align="left">xargs</td>
+<td align="left">将标准输入转换成命令行参数。</td>
+</tr>
+<tr>
+<td align="left">exec</td>
+<td align="left">调用并执行指令的命令。</td>
+</tr>
+<tr>
+<td align="left">export</td>
+<td align="left">设置或者显示环境变量。</td>
+</tr>
+<tr>
+<td align="left">unset</td>
+<td align="left">删除变量或函数。</td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">用于判断另外一个命令是否是内置命令。</td>
+</tr>
+<tr>
+<td align="left">bc</td>
+<td align="left">命令行科学计算器</td>
+</tr>
+<tr>
+<td align="left">系统管理与性能监视命令 (9 个)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">chkconfig</td>
+<td align="left">管理 Linux 系统开机启动项。</td>
+</tr>
+<tr>
+<td align="left">vmstat</td>
+<td align="left">虚拟内存统计。</td>
+</tr>
+<tr>
+<td align="left">mpstat</td>
+<td align="left">显示各个可用 CPU 的状态统计。</td>
+</tr>
+<tr>
+<td align="left">iostat</td>
+<td align="left">统计系统 IO。</td>
+</tr>
+<tr>
+<td align="left">sar</td>
+<td align="left">全面地获取系统的 CPU、运行队列、磁盘 I/O、分页（交换区）、内存、 CPU 中断和网络等性能数据。</td>
+</tr>
+<tr>
+<td align="left">ipcs</td>
+<td align="left">用于报告 Linux 中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</td>
+</tr>
+<tr>
+<td align="left">ipcrm</td>
+<td align="left">用来删除一个或更多的消息队列、信号量集或者共享内存标识。</td>
+</tr>
+<tr>
+<td align="left">strace</td>
+<td align="left">用于诊断、调试 Linux 用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。</td>
+</tr>
+<tr>
+<td align="left">ltrace</td>
+<td align="left">命令会跟踪进程的库函数调用, 它会显现出哪个库函数被调用。</td>
+</tr>
+<tr>
+<td align="left">关机 / 重启 / 注销和查看系统信息的命令（6 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">shutdown</td>
+<td align="left">关机。</td>
+</tr>
+<tr>
+<td align="left">halt</td>
+<td align="left">关机。</td>
+</tr>
+<tr>
+<td align="left">poweroff</td>
+<td align="left">关闭电源。</td>
+</tr>
+<tr>
+<td align="left">logout</td>
+<td align="left">退出当前登录的 Shell。</td>
+</tr>
+<tr>
+<td align="left">exit</td>
+<td align="left">退出当前登录的 Shell。</td>
+</tr>
+<tr>
+<td align="left">Ctrl+d</td>
+<td align="left">退出当前登录的 Shell 的快捷键。</td>
+</tr>
+<tr>
+<td align="left">进程管理相关命令（15 个）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">bg</td>
+<td align="left">将一个在后台暂停的命令，变成继续执行  （在后台执行）。</td>
+</tr>
+<tr>
+<td align="left">fg</td>
+<td align="left">将后台中的命令调至前台继续运行。</td>
+</tr>
+<tr>
+<td align="left">jobs</td>
+<td align="left">查看当前有多少在后台运行的命令。</td>
+</tr>
+<tr>
+<td align="left">kill</td>
+<td align="left">终止进程。</td>
+</tr>
+<tr>
+<td align="left">killall</td>
+<td align="left">通过进程名终止进程。</td>
+</tr>
+<tr>
+<td align="left">pkill</td>
+<td align="left">通过进程名终止进程。</td>
+</tr>
+<tr>
+<td align="left">crontab</td>
+<td align="left">定时任务命令。</td>
+</tr>
+<tr>
+<td align="left">ps</td>
+<td align="left">显示进程的快照。</td>
+</tr>
+<tr>
+<td align="left">pstree</td>
+<td align="left">树形显示进程。</td>
+</tr>
+<tr>
+<td align="left">nice/renice</td>
+<td align="left">调整程序运行的优先级。</td>
+</tr>
+<tr>
+<td align="left">nohup</td>
+<td align="left">忽略挂起信号运行指定的命令。</td>
+</tr>
+<tr>
+<td align="left">pgrep</td>
+<td align="left">查找匹配条件的进程。</td>
+</tr>
+<tr>
+<td align="left">runlevel</td>
+<td align="left">查看系统当前运行级别。</td>
+</tr>
+<tr>
+<td align="left">init</td>
+<td align="left">切换运行级别。</td>
+</tr>
+<tr>
+<td align="left">service</td>
+<td align="left">启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。</td>
+</tr>
+</tbody></table>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Wyt</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wyt-loc.github.io/2023/02/26/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">https://wyt-loc.github.io/2023/02/26/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Wyt</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/01/%E4%B8%80%E4%B8%AA%E8%8A%AF%E7%89%87%E4%B8%8D%E8%83%BD%E6%8E%A52%E4%B8%AA%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA%E5%9C%B0%E7%BA%BF%E7%9A%84%E9%97%AE%E9%A2%98/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="一个芯片不能接2个步进电机地线的问题">
+                        
+                        <span class="card-title">一个芯片不能接2个步进电机地线的问题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Wyt
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA/">
+                        <span class="chip bg-color">步进电机</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/25/STM32PWM%E7%9A%84%E5%8D%A0%E7%A9%BA%E6%AF%94%E8%AE%BE%E7%BD%AE/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="STM32PWM的占空比设置">
+                        
+                        <span class="card-title">STM32PWM的占空比设置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Wyt
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/PWM/">
+                        <span class="chip bg-color">PWM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Wyt</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">83.2k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Wyt-Loc" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1697556601@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1697556601" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1697556601" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
