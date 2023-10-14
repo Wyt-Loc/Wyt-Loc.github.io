@@ -389,56 +389,6 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/05/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%82%B9%E7%81%AF/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="树莓派点灯">
-                            
-                            <span class="card-title">树莓派点灯</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                树莓派引脚分布
-
-import RPi.GPIO as GPIO
-import time
-#注意BOARD和BCM编码的不同，这里设置的是BCM编码
-GPIO.setmode(GPIO.BCM)#如果是把BCM换成BOARD，下方则为GPI
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Wyt
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
-                            <span class="chip bg-color">树莓派</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/2023/05/04/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8A%A0%E6%B3%95/">
                         <div class="card-image">
                             
@@ -677,6 +627,56 @@ public:
                         <a href="/tags/%E5%A0%86%E5%86%85%E5%AD%98%E5%92%8C%E6%A0%88%E5%86%85%E5%AD%98/">
                             <span class="chip bg-color">堆内存和栈内存</span>
                         </a>
+                        
+                        <a href="/tags/Stm32/">
+                            <span class="chip bg-color">Stm32</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/04/29/stm32%E7%9A%84%E5%AE%9A%E6%97%B6%E5%99%A8/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="stm32的定时器">
+                            
+                            <span class="card-title">stm32的定时器</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Stm32纯软件方式实现定时功能void delay_us(uint32_t us)&#123;
+us *= 72;
+while(us--)
+&#125;
+
+这个方法肯定是不好的，造成CPU资源浪费，并且必然是不准确的延时，原因：1. 函数
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-29
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Wyt
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
                         
                         <a href="/tags/Stm32/">
                             <span class="chip bg-color">Stm32</span>
