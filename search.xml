@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux驱动开发 --- 1</title>
+      <link href="/2023/10/17/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91-1/"/>
+      <url>/2023/10/17/Linux%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux-驱动开发主要分为3大类"><a href="#Linux-驱动开发主要分为3大类" class="headerlink" title="Linux 驱动开发主要分为3大类"></a>Linux 驱动开发主要分为3大类</h2><pre><code> 1. 字符设备驱动，最多的。 2. 块设备驱动，存储。 3. 网络设备驱动。</code></pre><h2 id="什么是驱动："><a href="#什么是驱动：" class="headerlink" title="什么是驱动："></a>什么是驱动：</h2><p>驱动的本质就是 获取外设、传感器的原始数据，控制外设。 数据会提交到应用程序。</p><p>Linux下驱动编写既要编写一个驱动还要编写一个简单的测试程序，APP。单片机下的驱动和应用都是在一个文件也可以说在一个整体下，获取到数据直接使用，但是Linux下的驱动是一个文件，共别人去调用。相当于封装为系统的API接口。</p><h2 id="用户空间和内核空间："><a href="#用户空间和内核空间：" class="headerlink" title="用户空间和内核空间："></a>用户空间和内核空间：</h2><p>应用程序都运行在用户空间，驱动一类都运行在内核空间。 用户空间就是为了避免不正确的使用底层。造成系统错误。</p><h2 id="应用程序访问内核的方法："><a href="#应用程序访问内核的方法：" class="headerlink" title="应用程序访问内核的方法："></a>应用程序访问内核的方法：</h2><p>系统调用，异常（中断）和陷入。</p><p>应用程序不会直接访问内核，而实通过API函数来间接访问内核。例如，用户调用print函数，内核执行write函数。每个系统调用都有一个系统调用号。系统调用处于内核空间，应用程序无法直接访问，需要“陷入”到内核，方法就是软中断，陷入内核后还要指定系统调用号。最终指向到硬件平台。</p><h2 id="字符设备驱动流程："><a href="#字符设备驱动流程：" class="headerlink" title="字符设备驱动流程："></a>字符设备驱动流程：</h2><p>​    1。 Linux里面一切皆文件，驱动设备表现就是，在/dev/目录下的一个文件，，/dev/led/.</p><p>我们调用它，应用程序通过write写 1 led梁，写 0 led灭。</p><p>​    驱动是被应用程序调用的。</p><p>​    驱动是分框架的。</p><h2 id="字符设备驱动框架："><a href="#字符设备驱动框架：" class="headerlink" title="字符设备驱动框架："></a>字符设备驱动框架：</h2><p>​    字符设备驱动编写主要就是驱动对应的open, write,  close 等。。。其实就是一个大的结构体。</p><h2 id="驱动模块的加载与卸载："><a href="#驱动模块的加载与卸载：" class="headerlink" title="驱动模块的加载与卸载："></a>驱动模块的加载与卸载：</h2><p>Linux驱动程序可以编译到kernel 中， 也就是zImage， 也可以编译为模块，.ko。</p><p>Linux驱动编写需要内核代码，所以最好要有移植好的三巨头代码。方便很多。</p><p>内核代码是没有printf();的 有的是printk();</p><h2 id="Linux-设备号："><a href="#Linux-设备号：" class="headerlink" title="Linux 设备号："></a>Linux 设备号：</h2><p>Linux将设备号分为2部分， 主设备号和次设备号</p><p>主设备号占用前12为，此设备号占用低20位。</p><p>设备号操作函数|宏 ：</p><p>从dev_t 获取主设备号和此设备号 MAJOR（dev_t） MINOR(dev_t).</p><p>也可以使用主设备号和此设备号构成dev_t， 通过MKDEV(major, minor);</p><h2 id="file-operations的实现"><a href="#file-operations的实现" class="headerlink" title="file_operations的实现"></a><em>file_operations</em>的实现</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux驱动开发---1 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/2023/10/15/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC-build-main-xref-main/"/>
       <url>/2023/10/15/%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC-build-main-xref-main/</url>
