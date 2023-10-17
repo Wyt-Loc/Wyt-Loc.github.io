@@ -396,7 +396,7 @@ Linux下驱动编写既要编写">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    645
+                    683
                 </div>
                 
 
@@ -443,7 +443,14 @@ Linux下驱动编写既要编写">
 <p>设备号操作函数|宏 ：</p>
 <p>从dev_t 获取主设备号和此设备号 MAJOR（dev_t） MINOR(dev_t).</p>
 <p>也可以使用主设备号和此设备号构成dev_t， 通过MKDEV(major, minor);</p>
-<h2 id="file-operations的实现"><a href="#file-operations的实现" class="headerlink" title="file_operations的实现"></a><em>file_operations</em>的实现</h2>
+<h2 id="file-operations的实现"><a href="#file-operations的实现" class="headerlink" title="file_operations的实现"></a><em>file_operations</em>的实现</h2><p>抄。</p>
+<p>一些命令可查看Linux man 手册。</p>
+<h2 id="应用程序编写："><a href="#应用程序编写：" class="headerlink" title="应用程序编写："></a>应用程序编写：</h2><p>加载驱动。</p>
+<p>modprobe chadevbase c 200 0</p>
+<p>测试 </p>
+<p>​    /chardevbaseAPP    /dev/chrdevbase</p>
+<p>执行驱动程序。</p>
+
                 
             </div>
             <hr/>
