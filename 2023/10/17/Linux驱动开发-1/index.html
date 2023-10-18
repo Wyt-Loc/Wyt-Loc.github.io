@@ -389,21 +389,21 @@ Linux下驱动编写既要编写">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-17
+                    2023-10-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    683
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -450,6 +450,26 @@ Linux下驱动编写既要编写">
 <p>测试 </p>
 <p>​    /chardevbaseAPP    /dev/chrdevbase</p>
 <p>执行驱动程序。</p>
+<h2 id="内存映射："><a href="#内存映射：" class="headerlink" title="内存映射："></a>内存映射：</h2><pre><code> 1. 裸机LED灯实验就是操作6ULL的寄存器。 驱动开发也可以直接操作寄存器。
+ 2. Linux下驱动开发也可以操作寄存器，Linux 不能直接对寄存器物理地址进行读写操作。比如寄存器A物理地址为0x01010101, 裸机的时候可以直接对0x0101010101 这个物理地址进行操作，但是Linux不行，因为Linux会使能MMU。
+</code></pre>
+<h2 id="加载驱动："><a href="#加载驱动：" class="headerlink" title="加载驱动："></a>加载驱动：</h2><p>使用   insmod chrdevbase.ko  或 modprobe chrdevbase.ko 加载驱动文件：</p>
+<p>加载失败的话 试试执行 depmod   会自动生成几个文件 modules.alias、modules.symbols 和 modules.dep   </p>
+<p>再次执行 insmod chrdevbase.ko  或 modprobe chrdevbase.ko 加载驱动文件：</p>
+<p>加载成功之后。对应命令：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token number">1.</span> depmod 			 <span class="token comment">// 第一次加载驱动必须的</span>
+<span class="token number">2.</span> modprobe led<span class="token punctuation">.</span>ko	 <span class="token comment">// 加载驱动 会执行 init 函数</span>
+<span class="token number">3.</span> ls <span class="token operator">/</span>proc<span class="token operator">/</span>devices  <span class="token comment">// 会看到 设备号和设备名  例如 设备号为 200  设备名为 led</span>
+<span class="token number">3.</span> rmmod led<span class="token punctuation">.</span>ko		 <span class="token comment">// 卸载驱动</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="驱动一个简单外设步骤："><a href="#驱动一个简单外设步骤：" class="headerlink" title="驱动一个简单外设步骤："></a>驱动一个简单外设步骤：</h2><p>cortexA 系列的 start.s 文件一般是用来初始化一些底层的寄存器，之后设置 sp 指针跳入到C语言环境。</p>
+<h2 id="编写一个驱动步骤："><a href="#编写一个驱动步骤：" class="headerlink" title="编写一个驱动步骤："></a>编写一个驱动步骤：</h2><p>1.需要用汇编初始化一些外设，</p>
+<p>2.使用汇编初始化DDR。</p>
+<p>3设置sp指针一般指向DDR。</p>
+<p>4.设置好C语言指向环境。 由于C语言的执行需要入栈出栈，所以要设置好sp指针。</p>
+<p>5.CCM_CCGR【0 - 6】 7 个寄存器控制所有外设时钟使能。</p>
+<p>6.IO复用寄存器   IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO03  LED0 引脚 P1_3 将bit0~3 设置为 5，复用为普通IO口。</p>
+<p>7，设置电气属性 IOMUXC_SW_PAD_CTL_PAD_GPIO1_IO03  </p>
 
                 
             </div>
@@ -830,7 +850,7 @@ Linux下驱动编写既要编写">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">92.9k</span>
+                        class="white-color">93.4k</span>
             
             
             
