@@ -389,6 +389,56 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2023/02/20/%E8%A7%A3%E5%86%B3mpu6050%E7%A7%BB%E6%A4%8DFreeRTOS%E7%9A%84%E9%97%AE%E9%A2%98/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="解决mpu6050移植FreeRTOS的问题">
+                            
+                            <span class="card-title">解决mpu6050移植FreeRTOS的问题</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                j 今天终于是弄掉了这个困扰了2天的大麻烦，mpu6050移植了FreeRTOS之后一直读取不到数据，原因居然是正点原子的delay函数被FreeRTOS认为成了任务切换造成进程堵塞。所以把delay函数全部改成rtos里的就OK了
+但是 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Wyt
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/FreeRTOS%E5%AD%A6%E4%B9%A0/">
+                            <span class="chip bg-color">FreeRTOS学习</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/">
+                            <span class="chip bg-color">无人机</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2023/02/18/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4%EF%BC%883%EF%BC%89%E6%B5%8B%E8%B7%9D/">
                         <div class="card-image">
                             
@@ -636,57 +686,6 @@ def thread_1(): #创建多线程函数
             </div>
               <!-- 隐藏某个文章 -->
             
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/17/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4hbv-1780-2%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="双目摄像头基本使用">
-                            
-                            <span class="card-title">双目摄像头基本使用</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                打开摄像头 使用的是python的opencv
- 本摄像头图像为1280×480
-import cv2
-
- #定义摄像头
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH,
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-17
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Wyt
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%8F%8C%E7%9B%AE%E6%91%84%E5%83%8F%E5%A4%B4/">
-                            <span class="chip bg-color">双目摄像头</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
         </div>
     </article>
 
@@ -791,7 +790,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH,
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">93.4k</span>
+                        class="white-color">96.7k</span>
             
             
             
