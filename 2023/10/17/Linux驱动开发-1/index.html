@@ -389,21 +389,21 @@ Linux下驱动编写既要编写">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-18
+                    2023-10-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    9 分
                 </div>
                 
 
@@ -470,6 +470,273 @@ Linux下驱动编写既要编写">
 <p>5.CCM_CCGR【0 - 6】 7 个寄存器控制所有外设时钟使能。</p>
 <p>6.IO复用寄存器   IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO03  LED0 引脚 P1_3 将bit0~3 设置为 5，复用为普通IO口。</p>
 <p>7，设置电气属性 IOMUXC_SW_PAD_CTL_PAD_GPIO1_IO03  </p>
+<p>点灯代码：</p>
+<p>LED.c</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/types.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/kernel.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/delay.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/ide.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/init.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/module.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;linux/uaccess.h></span></span>
+
+<span class="token comment">/*
+注册驱动的注册和卸载
+*/</span>
+
+<span class="token comment">// 初始化一些SOC外设， 初始化DDR外设（这一步IMX6U不需要），</span>
+<span class="token comment">// 设置Sp指针指向DDR，初始化C语言环境。 程序入栈出栈需要SP指针。</span>
+
+<span class="token comment">// 主设备号</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LED_MAJOR</span> <span class="token expression"><span class="token number">200</span></span></span>
+
+<span class="token comment">// 设备名</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LED_NAME</span> <span class="token string">"led"</span></span>
+
+<span class="token comment">// 时钟使能     CCM_CCGR1 的基地址                 Address: 20C_4000h base + 6Ch offset = 20C_406Ch</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">CCM_CCGR1_BASE</span> <span class="token expression"><span class="token punctuation">(</span><span class="token number">0X020C406C</span><span class="token punctuation">)</span></span></span>
+
+<span class="token comment">// IO复用       IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO03  Address: 20E_0000h base + 68h offset = 20E_0068h</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SW_MUX_GPIO1_IO03_BASE</span> <span class="token expression"><span class="token punctuation">(</span><span class="token number">0X020E0068</span><span class="token punctuation">)</span></span></span>
+
+<span class="token comment">// 设置电气属性 IOMUXC_SW_MUX_CTL_PAD_LCD_DATA03  Address: 20E_0000h base + 124h offset = 20E_0124h</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SW_PAD_GPIO1_IO03_BASE</span> <span class="token expression"><span class="token punctuation">(</span><span class="token number">0X020E02F4</span><span class="token punctuation">)</span></span></span>
+
+<span class="token comment">// 控制高低电平 GPIOx_DR                          Address: 209_C000（Base address） + 0h offset</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">GPIO1_DR_BASE</span> <span class="token expression"><span class="token punctuation">(</span><span class="token number">0X0209C000</span><span class="token punctuation">)</span></span></span>
+
+<span class="token comment">// 设置输入输出模式 GPIOx_GDIR                    Address: 209_C000（Base address） + 4h offset</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">GPIO1_GDIR_BASE</span> <span class="token expression"><span class="token punctuation">(</span><span class="token number">0X0209C004</span><span class="token punctuation">)</span></span></span>
+
+<span class="token comment">// 物理地址映射后虚拟地址指针</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> __iomem <span class="token operator">*</span>IMX6U_CCM_CCGR1<span class="token punctuation">;</span>       <span class="token comment">// 时钟</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> __iomem <span class="token operator">*</span>IMX6SW_MUX_GPIO1_IO03<span class="token punctuation">;</span> <span class="token comment">// IO复用</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> __iomem <span class="token operator">*</span>SW_PAD_GPIO1_IO03<span class="token punctuation">;</span>     <span class="token comment">// 电器属性</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> __iomem <span class="token operator">*</span>GPIO1_DR<span class="token punctuation">;</span>              <span class="token comment">// 输出电平</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> __iomem <span class="token operator">*</span>GPIO1_GDIR<span class="token punctuation">;</span>            <span class="token comment">// 输入输出模式</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LEDOFF</span> <span class="token expression"><span class="token number">0</span> </span><span class="token comment">// LED 灭</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LEDON</span> <span class="token expression"><span class="token number">1</span>  </span><span class="token comment">// LED亮</span></span>
+
+<span class="token keyword">void</span> <span class="token function">led_Switch</span><span class="token punctuation">(</span>u8 sta<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    u32 val <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sta <span class="token operator">==</span> LEDON<span class="token punctuation">)</span> <span class="token comment">// open led</span>
+    <span class="token punctuation">&#123;</span>
+        val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        val <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 清零 打开LED灯。</span>
+        <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>sta <span class="token operator">==</span> LEDOFF<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        u32 val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        val <span class="token operator">|=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*  open 的函数原型
+    int (*open)(struct inode *, struct file *);
+*/</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">led_open</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">inode</span> <span class="token operator">*</span>inode<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">file</span> <span class="token operator">*</span>filp<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+    release 的函数原型
+    int (*release) (struct inode *, struct file *);
+*/</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">led_release</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">inode</span> <span class="token operator">*</span>inode<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">file</span> <span class="token operator">*</span>file<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">/*
+    write 的函数原型
+    ssize_t (*write)(struct file *, const char __user *, size_t, loff_t *);
+*/</span>
+<span class="token keyword">static</span> <span class="token class-name">ssize_t</span> <span class="token function">led_write</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">file</span> <span class="token operator">*</span>filp<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> __user <span class="token operator">*</span>buf<span class="token punctuation">,</span> <span class="token class-name">size_t</span> count<span class="token punctuation">,</span> <span class="token class-name">loff_t</span> <span class="token operator">*</span>ppos<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">int</span> retvalue<span class="token punctuation">;</span>
+    u8 databuf<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    retvalue <span class="token operator">=</span> <span class="token function">copy_from_user</span><span class="token punctuation">(</span>databuf<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>retvalue <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printk</span><span class="token punctuation">(</span><span class="token string">"kernel write failed! \r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>EFAULT<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 判断开灯还是关灯</span>
+    <span class="token function">led_Switch</span><span class="token punctuation">(</span>databuf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">file_operations</span> led_fops <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token punctuation">.</span>owner <span class="token operator">=</span> THIS_MODULE<span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>open <span class="token operator">=</span> led_open<span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>write <span class="token operator">=</span> led_write<span class="token punctuation">,</span>
+    <span class="token punctuation">.</span>release <span class="token operator">=</span> led_release<span class="token punctuation">,</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* 驱动加载入口 */</span>
+<span class="token keyword">static</span> <span class="token keyword">int</span> __init <span class="token function">led_init</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// 1. 初始化LED灯。</span>
+    <span class="token comment">// #define ioremap(cookie,size)		__arm_ioremap((cookie), (size), MT_DEVICE)</span>
+    <span class="token comment">// extern void __iomem *__arm_ioremap(phys_addr_t, size_t, unsigned int);</span>
+    <span class="token comment">// ioremap 就是将物理地址映射为虚拟地址。</span>
+    <span class="token comment">// // phys_addr_t 要映射的物理地址 size_t 要映射资源的大小  32bit = 4Byte。</span>
+    IMX6U_CCM_CCGR1 <span class="token operator">=</span> <span class="token function">ioremap</span><span class="token punctuation">(</span>CCM_CCGR1_BASE<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 映射IO复用寄存器地址</span>
+    IMX6SW_MUX_GPIO1_IO03 <span class="token operator">=</span> <span class="token function">ioremap</span><span class="token punctuation">(</span>SW_MUX_GPIO1_IO03_BASE<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 映射电器属性寄存器地址</span>
+    SW_PAD_GPIO1_IO03 <span class="token operator">=</span> <span class="token function">ioremap</span><span class="token punctuation">(</span>SW_PAD_GPIO1_IO03_BASE<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 映射输出电平寄存器地址</span>
+    GPIO1_DR <span class="token operator">=</span> <span class="token function">ioremap</span><span class="token punctuation">(</span>GPIO1_DR_BASE<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 映射输入输出模式寄存器地址</span>
+    GPIO1_GDIR <span class="token operator">=</span> <span class="token function">ioremap</span><span class="token punctuation">(</span>GPIO1_GDIR_BASE<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 初始化</span>
+    u32 val <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>IMX6U_CCM_CCGR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    val <span class="token operator">&amp;=</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token number">3</span> <span class="token operator">&lt;&lt;</span> <span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 先清除配置的bit26，27</span>
+    val <span class="token operator">|=</span> <span class="token number">3</span> <span class="token operator">&lt;&lt;</span> <span class="token number">26</span><span class="token punctuation">;</span>    <span class="token comment">// 将26， 7 置1</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> IMX6U_CCM_CCGR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 设置复用</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span><span class="token number">0x5</span><span class="token punctuation">,</span> IMX6SW_MUX_GPIO1_IO03<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 设置电气属性</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span><span class="token number">0x10B0</span><span class="token punctuation">,</span> SW_PAD_GPIO1_IO03<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 设置GPIO1_3 为输出模式</span>
+    val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>GPIO1_GDIR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    val <span class="token operator">|=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">// 将 bit3 置1</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> GPIO1_GDIR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 点亮</span>
+    val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    val <span class="token operator">&amp;=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 清零 打开LED灯。</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> ret<span class="token punctuation">;</span>
+    <span class="token comment">// 1. 注册字符设备</span>
+    ret <span class="token operator">=</span> <span class="token function">register_chrdev</span><span class="token punctuation">(</span>LED_MAJOR<span class="token punctuation">,</span> LED_NAME<span class="token punctuation">,</span> <span class="token operator">&amp;</span>led_fops<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 注册设备</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printk</span><span class="token punctuation">(</span><span class="token string">"led Init Error\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EIO<span class="token punctuation">;</span> <span class="token comment">// IO error</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printk</span><span class="token punctuation">(</span><span class="token string">"LED驱动注册\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> __exit <span class="token function">led_exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+
+    u32 val <span class="token operator">=</span> <span class="token function">readl</span><span class="token punctuation">(</span>GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    val <span class="token operator">|=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">writel</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printk</span><span class="token punctuation">(</span><span class="token string">"关闭LED灯\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 取消虚拟地址映射</span>
+    <span class="token function">iounmap</span><span class="token punctuation">(</span>IMX6U_CCM_CCGR1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">iounmap</span><span class="token punctuation">(</span>IMX6SW_MUX_GPIO1_IO03<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">iounmap</span><span class="token punctuation">(</span>SW_PAD_GPIO1_IO03<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">iounmap</span><span class="token punctuation">(</span>GPIO1_DR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">iounmap</span><span class="token punctuation">(</span>GPIO1_GDIR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">unregister_chrdev</span><span class="token punctuation">(</span>LED_MAJOR<span class="token punctuation">,</span> LED_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 注销设备</span>
+    <span class="token function">printk</span><span class="token punctuation">(</span><span class="token string">"LED驱动卸载\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">module_init</span><span class="token punctuation">(</span>led_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">module_exit</span><span class="token punctuation">(</span>led_exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">MODULE_LICENSE</span><span class="token punctuation">(</span><span class="token string">"GPL"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">MODULE_AUTHOR</span><span class="token punctuation">(</span><span class="token string">"Wyt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>LEDAPP.c</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+
+<span class="token comment">/*
+    int argc : 参数个数
+    char *argv[] : 参数内容  1 开灯    0 关灯
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LEDOFF</span> <span class="token expression"><span class="token number">0</span></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LEDON</span> <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> args<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> fd<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ret<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>filename<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">char</span> databuf<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>args <span class="token operator">!=</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请确认传入的参数是否正确\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    filename <span class="token operator">=</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> O_RDWR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>fd <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" LED 打开失败\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 将字符转为数字</span>
+    databuf<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">atoi</span><span class="token punctuation">(</span>argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    ret <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> databuf<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>databuf<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"LED控制失败\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>ret<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用说明。</p>
+<ol>
+<li><p>make 编译 2个文件，之后</p>
+</li>
+<li><p>sudo cp led.ko  ledApp /home/wyt/linux/nfs/rootfs/lib/modules/4.1.15/ -f  加载到开发板</p>
+</li>
+<li><p>在开发板挂载，</p>
+</li>
+<li><p>modprobe    led.ko </p>
+</li>
+<li><p>mknod /dev/led c 200 0</p>
+</li>
+<li><p>./ledApp /dev/led  1  亮</p>
+</li>
+<li><p>./ledApp / dev/led 0 灭</p>
+<p>完成</p>
+</li>
+</ol>
 
                 
             </div>
@@ -848,7 +1115,7 @@ Linux下驱动编写既要编写">
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">97.3k</span>
+                        class="white-color">99.8k</span>
             
             
             
